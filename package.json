@@ -1,5 +1,5 @@
 {
-  "name": "clear",
+  "name": "Youtube_Music",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,5 +13,11 @@
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.2.5"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@tailwindcss/vite": "^4.1.18",
+    "navigo": "^8.11.1",
+    "tailwindcss": "^4.1.18"
   }
 }

@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@theme {
+  --color-primary: #030303;
+}
+
+.sidebar-item.active {
+  @apply bg-[#353535];
+}
+
+.sidebar-item.active {
+  @apply bg-[#353535];
+}
+
+.sidebar-slide-nav-item.active {
+  @apply bg-[#333333];
+}
