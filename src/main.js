@@ -15,6 +15,7 @@ const init = () => {
     ${Sidebar()}
     ${SidebarSlide()}
     ${App()}
+    ${Footer()}
   `;
 }
 

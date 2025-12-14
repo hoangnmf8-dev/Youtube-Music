@@ -10,7 +10,7 @@ function Header() {
       <div class="wrapper h-full w-full mx-auto">
         <div class="row h-full flex justify-between items-center">
           <div class="header-nav flex items-center gap-5">
-            <button class="header-btn-nav p-3 flex items-center">
+            <button class="header-btn-nav p-3 flex items-center transition transition-colors duration-1.5 cursor-pointer rounded-full hover:bg-hover">
               <i class="fa-solid fa-bars text-white text-xl"></i>
             </button>
 

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @theme {
   --color-primary: #030303;
+  --color-hover: #333333;
 }
 
 .sidebar-item.active {

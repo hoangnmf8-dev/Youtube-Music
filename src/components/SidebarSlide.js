@@ -52,24 +52,25 @@ function SidebarSlide () {
       </div>
 
       <nav class="flex flex-col items-center px-3">
-        <a href="/" class="sidebar-slide-nav-item active w-full flex items-center gap-4 rounded-lg p-3 text-lg">
+        <a href="/" class="sidebar-slide-nav-item active w-full flex items-center gap-4 rounded-lg p-3 text-lg hover:bg-[#333333] transition-all duration-1.5">
           <i class="fa-regular fa-house text-xl"></i>
           <span>Trang chủ</span>
         </a>
-        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg">
+        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg hover:bg-[#333333] transition-all duration-1.5">
           <i class="fa-regular fa-compass text-xl"></i>
           <span>Khám phá</span>
         </a>
-        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg">
+        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg hover:bg-[#333333] transition-all duration-1.5">
           <i class="fa-regular fa-bookmark text-xl"></i>
           <span>Thư viện</span>
         </a>
-        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg">
+        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg hover:bg-[#333333] transition-all duration-1.5">
           <i class="fa-solid fa-crown text-xl"></i>
           <span>Nâng cấp</span>
         </a>
       </nav>
     </aside>
+    <div class="pointer-events-none fixed inset-0 bg-black/80 transition transition-opacity opacity-0 duration-300"></div>
   `
 }
 
