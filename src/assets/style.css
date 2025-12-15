@@ -4,6 +4,12 @@
   --color-hover: #333333;
 }
 
+body {
+  background-image: linear-gradient(160deg, #050a12, #0a1a2f, #112e42, #1b2f4a);
+  overflow-x: hidden;
+  font-family: Roboto;
+}
+
 .sidebar-item.active {
   @apply bg-[#353535];
 }
