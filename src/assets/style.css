@@ -14,8 +14,8 @@ body {
   font-family: Roboto;
 }
 
-.sidebar-item.active {
-  @apply bg-[#353535];
+button {
+  user-select: none;
 }
 
 .sidebar-item.active {
@@ -24,4 +24,47 @@ body {
 
 .sidebar-slide-nav-item.active {
   @apply bg-[#333333];
+}
+
+@layer components {
+  #header .toast.show{
+    @apply fixed top-[100px] right-0 min-w-[200px] rounded-lg text-white text-sm text-center px-5 py-3;
+    transform: translateX(calc(100% + 20px));
+    animation: slide_show 2s ease-in-out;
+  }
+
+  @keyframes slide_show {
+    0% {
+      transform: translateX(100%);
+    }
+    10% {
+      transform: translateX(-10px); 
+    }
+    70% {
+      transform: translateX(-10px);
+    }
+    85% {
+      transform: translateX(-30px); 
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  #header .loading-modal {
+    @apply fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-9999;
+  }
+
+  #header .loading-modal.show {
+    @apply block;
+  }
+
+  #header .loading-modal .animate-spin {
+    animation: spin 2s linear infinite;
+  }
+  @keyframes spin {
+    100% {
+      rotate: 360deg;
+    }
+  }
 }

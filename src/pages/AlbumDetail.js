@@ -3,7 +3,7 @@ import SongInfor from "../components/SongInfor";
 
 function AlbumDetail() {
   return `
-    <div class="p2">
+    <div class="p-2">
       <div class="wrapper">
         <div class="row flex flex-col flex-wrap justify-between gap-8 lg:flex-row items-center lg:items-start">
           <div class="item-infor flex flex-col w-[400px] gap-6 shrink-0 grow-0">

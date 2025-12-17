@@ -1,8 +1,9 @@
 import Navigo from "navigo";
 import { router } from "../route/router";
 import TextSlide from "../components/TextSlide";
-import QuickPickSlide from "../components/QuickPickSlide";
+import QuickPickSlide from "../components/slide/QuickPickSlide";
 import SongSlide from "../components/SongSlide";
+import toggleLoading from "../utils/toggle_lodaing";
 
 function Home() {
   return `
@@ -21,3 +22,8 @@ function Home() {
 }
 
 export default Home;
+
+export const afterRenderHome = async () => {
+  toggleLoading(false);
+
+};

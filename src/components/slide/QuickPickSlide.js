@@ -1,6 +1,6 @@
-import "../assets/quickpick_slide.css"
+import "../../assets/quickpick_slide.css";
 import moodCard from "./moodCard.js";
-import quickpickCard from "./quickpickCard.js"
+import quickpickCard from "./quickpickCard.js";
 
 function QuickPickSlide(id) {
   return `
@@ -24,13 +24,13 @@ function QuickPickSlide(id) {
       </div>
 
       <div class="section-body flex overflow-x-auto gap-4 scrollbar-pill pb-10">
-        ${moodCard()}
-        ${moodCard()}
-        ${moodCard()}
-        ${moodCard()}
+        ${quickpickCard()}
+        ${quickpickCard()}
+        ${quickpickCard()}
+        ${quickpickCard()}
       </div>
     </section>
-  `
+  `;
 }
 
 export default QuickPickSlide;

@@ -5,7 +5,7 @@ function Header() {
   return `
     <header
       id="header"
-      class="fixed top-0 left-0 right-0 bg-primary z-50 w-ful h-[72px] px-2 sm:px-4"
+      class="fixed top-0 left-0 right-0 bg-primary z-30 w-ful h-[72px] px-2 sm:px-4"
     >
       <div class="wrapper h-full w-full mx-auto">
         <div class="row h-full flex justify-between items-center">
@@ -99,26 +99,75 @@ function Header() {
               </button>
   
               <div class="header-user select-none">
-                <button
-                  class="w-10 h-10 flex items-center justify-center bg-white/20 rounded-full text-white font-semibold cursor-pointer hover:bg-white/30 transition"
-                >
-                  M
-                </button>
-  
-                <div
-                  class="drop-menu absolute right-0 mt-2 w-52 rounded-xl overflow-hidden bg-[#1f1f1f] shadow-lg border border-white/10 transition-all duration-150 z-50 opacity-0 pointer-events-none translate-y-2"
-                >
-                  <a href="" class="drop-menu-item px-4 py-3 text-white block">Thông tin người dùng</a>
-                  <a href="" class="drop-menu-item px-4 py-3 text-white block">Đổi mật khẩu</a>
-                  <a href="" class="drop-menu-item px-4 py-3 text-red-500 block">Đăng xuất</a>
-                </div>
+               
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="toast"></div>
+      <div class="loading-modal hidden">
+        <div class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
       </div>
     </header>
   `
 }
 
 export default Header;
+
+const $ = document.querySelector.bind(document);
+
+const renderBeforeLogin = () => {
+  const headerUserBtn = $("#header .header-user");
+  headerUserBtn.innerHTML = `
+    <a href="/login" class="rounded-full bg-white text-sm font-semibold text-black px-4 py-2 cursor-pointer hover:bg-gray-300 transition-all duration-150">Đăng nhập</a>
+  `
+  
+}
+
+const renderAfterLogin = () => {
+  const headerUserBtn = $("#header .header-user");
+  headerUserBtn.innerHTML = `
+    <button
+      class="w-10 h-10 flex items-center justify-center bg-white/20 rounded-full text-white font-semibold cursor-pointer hover:bg-white/30 transition"
+    >
+      M
+    </button>
+
+    <div
+      class="drop-menu absolute right-0 mt-2 w-52 rounded-xl overflow-hidden bg-[#1f1f1f] shadow-lg border border-white/10 transition-all duration-150 z-50 opacity-0 pointer-events-none translate-y-2"
+    >
+      <a href="" data-navigo class="drop-menu-item px-4 py-3 text-white block">Thông tin người dùng</a>
+      <a href="" class="drop-menu-item px-4 py-3 text-white block">Đổi mật khẩu</a>
+      <a href="" class="drop-menu-item px-4 py-3 text-red-500 block">Đăng xuất</a>
+    </div>
+  `
+}
+
+const showSidebarSlide = () => {
+  const headerNavBtn = $("#header .header-btn-nav");
+  headerNavBtn.addEventListener("click", e => {
+    $("#sidebar-slide").classList.remove("-translate-x-full");
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+export const afterRenderHeader = () => {
+  if(localStorage.getItem("access_token")) {
+    renderAfterLogin();
+  } else {
+    renderBeforeLogin();
+  }
+  showSidebarSlide();
+}

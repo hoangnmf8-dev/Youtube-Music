@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SongSlide from "../components/SongSlide";
-// import QuickPickSlide from "../components/QuickPickSlide";
+import QuickPickSlide from "../components/slide/QuickPickSlide";
 function Explore() {
   return `
     <div class="p-2">

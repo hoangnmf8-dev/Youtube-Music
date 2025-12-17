@@ -1,9 +1,9 @@
 import "./assets/style.css";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import "@fontsource/roboto"; 
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "@fontsource/roboto";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import App from "./app"
+import App from "./app";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import SidebarSlide from "./components/SidebarSlide";
@@ -19,6 +19,6 @@ const init = () => {
     ${SidebarSlide()}
     ${App()}
   `;
-}
+};
 init();
 initRouter();

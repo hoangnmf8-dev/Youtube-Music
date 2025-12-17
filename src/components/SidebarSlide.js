@@ -1,11 +1,11 @@
-function SidebarSlide () {
+function SidebarSlide() {
   return `
     <aside
       id="sidebar-slide"
       class="fixed top-0 left-0 w-56 h-full bg-black/95 backdrop-blur-xl text-white transform transition-transform duration-300 z-50 border-r border-white/10 pt-1 -translate-x-full"
     >
       <div class="flex gap-5 items-center pl-6 py-5">
-        <button id="close-sidebar" class="act-btn flex hover:bg-white/10">
+        <button id="close-sidebar" class="flex hover:bg-white/20 p-3 rounded-full cursor-pointer">
           <i class="fa-solid fa-xmark text-xl"></i>
         </button>
 
@@ -51,27 +51,78 @@ function SidebarSlide () {
         </div>
       </div>
 
-      <nav class="flex flex-col items-center px-3">
-        <a href="/" class="sidebar-slide-nav-item active w-full flex items-center gap-4 rounded-lg p-3 text-lg hover:bg-[#333333] transition-all duration-1.5">
-          <i class="fa-regular fa-house text-xl"></i>
-          <span>Trang chủ</span>
-        </a>
-        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg hover:bg-[#333333] transition-all duration-1.5">
-          <i class="fa-regular fa-compass text-xl"></i>
-          <span>Khám phá</span>
-        </a>
-        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg hover:bg-[#333333] transition-all duration-1.5">
-          <i class="fa-regular fa-bookmark text-xl"></i>
-          <span>Thư viện</span>
-        </a>
-        <a href="/" class="sidebar-slide-nav-item w-full flex items-center gap-4 rounded-lg p-3 text-lg hover:bg-[#333333] transition-all duration-1.5">
-          <i class="fa-solid fa-crown text-xl"></i>
-          <span>Nâng cấp</span>
-        </a>
+      <nav class="sidebar-slide-nav flex flex-col items-center px-3 mt-4">
+        
       </nav>
     </aside>
     <div class="pointer-events-none fixed inset-0 bg-black/80 transition transition-opacity opacity-0 duration-300"></div>
-  `
+  `;
 }
 
 export default SidebarSlide;
+
+const $ = document.querySelector.bind(document);
+
+const renderBeforeLogin = () => {
+  const sidebarSlideNav = $(".sidebar-slide-nav");
+  sidebarSlideNav.innerHTML = `
+    <a href="/" data-navigo class="sidebar-slide-nav-item active w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+      <i class="fa-regular fa-house text-xl"></i>
+      <span>Trang chủ</span>
+    </a>
+    <a href="/explore" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+      <i class="fa-regular fa-compass text-xl"></i>
+      <span>Khám phá</span>
+    </a>
+    <a href="/library" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+      <i class="fa-regular fa-bookmark text-xl"></i>
+      <span>Thư viện</span>
+    </a>
+    <a href="/upgrade" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+      <i class="fa-solid fa-crown text-xl"></i>
+      <span>Nâng cấp</span>
+    </a>
+    <hr class="border-white/20 my-2 w-full">
+    <a href="/login" data-navigo class="rounded-full bg-[#1d1d1d] text-white font-semibold p-3 mt-4 w-full text-center hover:bg-[#333434] transition-all duration-150 cursor-pointer">Đăng nhập</a>
+    <p class="mt-2 text-[12px] text-[#909090] leading-6">Đăng nhập để tạo và chia sẻ danh sách phát, nhận nội dung đề xuất dành riêng cho bạn.</p>
+  `;
+};
+
+const renderAfterLogin = () => {
+  const sidebarSlideNav = $(".sidebar-slide-nav");
+  sidebarSlideNav.innerHTML = `
+    <a href="/" data-navigo class="sidebar-slide-nav-item active w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+      <i class="fa-regular fa-house text-xl"></i>
+      <span>Trang chủ</span>
+    </a>
+    <a href="/explore" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+      <i class="fa-regular fa-compass text-xl"></i>
+      <span>Khám phá</span>
+    </a>
+    <a href="/library" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+      <i class="fa-regular fa-bookmark text-xl"></i>
+      <span>Thư viện</span>
+    </a>
+    <a href="#" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+      <i class="fa-solid fa-crown text-xl"></i>
+      <span>Nâng cấp</span>
+    </a>`;
+};
+
+const closeSideBarSlide = () => {
+  const sidebarSlideEl = $("#sidebar-slide");
+  const closeSidebarSlideBtn = $("#sidebar-slide #close-sidebar");
+  closeSidebarSlideBtn.addEventListener("click", (e) => {
+    sidebarSlideEl.classList.add("-translate-x-full");
+  });
+};
+
+export const afterRenderSidebarSlide = () => {
+  if (localStorage.getItem("access_token")) {
+    renderAfterLogin();
+  } else {
+    renderBeforeLogin();
+  }
+
+  closeSideBarSlide();
+};
