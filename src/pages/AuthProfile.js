@@ -1,7 +1,7 @@
 import escapeHTML from "../utils/escapeHTML";
-import { getProfile, updateProfile } from "../service/auth";
-import showToast from "../utils/show_toast";
-import toggleLoading from "../utils/toggle_lodaing";
+import { getProfile, updateProfile } from "../service/authApi";
+import showToast from "../utils/showToast";
+import toggleLoading from "../utils/toggleLodaing";
 import { router } from "../route/router";
 
 function AuthProfile() {
@@ -127,7 +127,7 @@ const upadteUser = async () => {
             email: emailInput.value.trim(),
           });
           showToast(true, "Cập nhật thông tin thành công");
-            router.navigate("/");
+          router.navigate("/");
         } catch (error) {
           showToast(false, error.message);
         } finally {
@@ -141,5 +141,7 @@ const upadteUser = async () => {
 };
 
 export const afterRenderAuthProfile = () => {
+  $(".sidebar-item.active")?.classList.remove("active");
+  $(".sidebar-item.sidebar-slide-nav-item.active")?.classList.remove("active");
   upadteUser();
 };

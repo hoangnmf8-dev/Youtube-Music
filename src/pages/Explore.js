@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import SongSlide from "../components/SongSlide";
-import QuickPickSlide from "../components/slide/QuickPickSlide";
+import SongSlide from "../components/SongSlide/SongSlide";
+import QuickPickSlide from "../components/quickpickSlide/QuickPickSlide";
 function Explore() {
   return `
     <div class="p-2">
@@ -21,9 +21,6 @@ function Explore() {
           <span>Tâm trạng và thể loại</span>
         </a>
       </section>
-      ${SongSlide("albums-explore")}
-      ${QuickPickSlide("moods-explore")}
-      ${SongSlide("videos-explore")}
     </div>
     
   `;

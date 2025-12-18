@@ -28,7 +28,7 @@ button {
 
 @layer components {
   #header .toast.show{
-    @apply fixed top-[100px] right-0 min-w-[200px] rounded-lg text-white text-sm text-center px-5 py-3;
+    @apply fixed top-[100px] right-0 min-w-[200px] z-50 rounded-lg text-white text-sm text-center px-5 py-3;
     transform: translateX(calc(100% + 20px));
     animation: slide_show 2s ease-out;
   }
@@ -49,7 +49,7 @@ button {
   }
 
   #header .loading-modal {
-    @apply fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-9999;
+    @apply fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-40;
   }
 
   #header .loading-modal.show {

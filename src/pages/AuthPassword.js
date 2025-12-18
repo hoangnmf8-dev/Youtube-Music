@@ -1,8 +1,8 @@
 import escapeHTML from "../utils/escapeHTML";
-import { getProfile, updateProfile } from "../service/auth";
-import {updatePassword} from "../service/auth";
-import showToast from "../utils/show_toast";
-import toggleLoading from "../utils/toggle_lodaing";
+import { getProfile, updateProfile } from "../service/authApi";
+import { updatePassword } from "../service/authApi";
+import showToast from "../utils/showToast";
+import toggleLoading from "../utils/toggleLodaing";
 import { router } from "../route/router";
 
 function AuthPassword() {
@@ -108,7 +108,7 @@ const updatePasswordUser = async () => {
       errorText = "Mật khẩu phải có ít nhất 8 ký tự";
     }
 
-    if(check && currentPasswordInput.value.trim() === inputValue) {
+    if (check && currentPasswordInput.value.trim() === inputValue) {
       isValid = false;
       errorText = "Mật khẩu mới phải khác mật khẩu hiện tại";
     }
@@ -181,7 +181,7 @@ const updatePasswordUser = async () => {
         showToast(true, "Cập nhật mật khẩu thành công");
         router.navigate("/");
       } catch (error) {
-        if(+error.status === 400) {
+        if (+error.status === 400) {
           showToast(false, "Mật khẩu hiện tại không chính xác");
         } else {
           showToast(false, error.message);
@@ -194,5 +194,7 @@ const updatePasswordUser = async () => {
 };
 
 export const afterRenderAuthPassword = () => {
+  $(".sidebar-item.active")?.classList.remove("active");
+  $(".sidebar-item.sidebar-slide-nav-item.active")?.classList.remove("active");
   updatePasswordUser();
 };

@@ -1,9 +1,9 @@
 import "../assets/style.css";
-import {router} from "../route/router";
-import { getProfile } from "../service/auth";
+import { router } from "../route/router";
+import { getProfile } from "../service/authApi";
 import { logout } from "../service/httpRequest";
-import showToast from "../utils/show_toast";
-import toggleLoading from "../utils/toggle_lodaing";
+import showToast from "../utils/showToast";
+import toggleLoading from "../utils/toggleLodaing";
 function Header() {
   return `
     <header
@@ -102,7 +102,23 @@ function Header() {
               </button>
   
               <div class="header-user select-none">
-               
+               ${
+                 localStorage.getItem("access_token")
+                   ? `<button
+                class="w-10 h-10 flex items-center justify-center bg-white/20 rounded-full text-white font-semibold cursor-pointer hover:bg-white/30 transition"
+              >
+                M 
+              </button>
+
+              <div
+                class="drop-menu absolute right-2 mt-2 w-52 rounded-xl overflow-hidden bg-[#1f1f1f] shadow-lg border border-white/10 transition-all duration-150 z-50"
+              >
+                <a href="/auth/profile" data-navigo class="drop-menu-item px-4 py-3 text-white block hover:bg-white/10">Thông tin người dùng</a>
+                <a href="/auth/password" data-navigo class="drop-menu-item px-4 py-3 text-white block hover:bg-white/10">Đổi mật khẩu</a>
+                <a href="" data-navigo class="drop-menu-item logout px-4 py-3 text-red-500 block hover:bg-white/10">Đăng xuất</a>
+              </div>`
+                   : `<a href="/login" class="rounded-full bg-white text-sm font-semibold text-black px-5 py-3 cursor-pointer hover:bg-gray-300 transition-all duration-150">Đăng nhập</a>`
+               }
               </div>
             </div>
           </div>
@@ -124,7 +140,7 @@ const $ = document.querySelector.bind(document);
 const renderBeforeLogin = () => {
   const headerUserBtn = $("#header .header-user");
   headerUserBtn.innerHTML = `
-    <a href="/login" class="rounded-full bg-white text-sm font-semibold text-black px-4 py-2 cursor-pointer hover:bg-gray-300 transition-all duration-150">Đăng nhập</a>
+    <a href="/login" class="rounded-full bg-white text-sm font-semibold text-black px-5 py-3 cursor-pointer hover:bg-gray-300 transition-all duration-150">Đăng nhập</a>
   `;
 };
 
@@ -165,7 +181,7 @@ const handleLogout = () => {
   const logoutBtn = $("#header .logout");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", (e) => {
-      // toggleLoading(true);
+      toggleLoading(true);
       showToast(true, "Đăng xuất thành công");
       logout();
       logoutBtn.closest(".drop-menu").classList.remove("show");
@@ -181,4 +197,5 @@ export const afterRenderHeader = async () => {
     renderBeforeLogin();
   }
   showSidebarSlide();
+  router.updatePageLinks();
 };

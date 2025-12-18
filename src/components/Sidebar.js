@@ -17,15 +17,15 @@ const $ = document.querySelector.bind(document);
 const renderBeforeLogin = () => {
   const sidebarWrapper = $("#sidebar .sidebar-wrapper");
   sidebarWrapper.innerHTML = `
-    <a href="/" class="sidebar-item group active flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
+    <a href="/" class="sidebar-item home group active flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
       <i class="fa-regular fa-house text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Trang chủ</p>
     </a>
-    <a href="/explore" class="sidebar-item group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
+    <a href="/explore" class="sidebar-item explore group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
       <i class="fa-regular fa-compass text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Khám phá</p>
     </a>
-    <a href="/library" class="sidebar-item group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
+    <a href="/library" class="sidebar-item library group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
       <i class="fa-regular fa-bookmark text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Thư viện</p>
     </a>
@@ -45,19 +45,19 @@ const renderBeforeLogin = () => {
 const renderAfterLogin = () => {
   const sidebarWrapper = $("#sidebar .sidebar-wrapper");
   sidebarWrapper.innerHTML = `
-    <a href="/" class="sidebar-item group active flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
+    <a href="/" class="sidebar-item home group active flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
       <i class="fa-regular fa-house text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Trang chủ</p>
     </a>
-    <a href="/explore" class="sidebar-item group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
+    <a href="/explore" class="sidebar-item explore group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
       <i class="fa-regular fa-compass text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Khám phá</p>
     </a>
-    <a href="/library" class="sidebar-item group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
+    <a href="/library" class="sidebar-item library group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
       <i class="fa-regular fa-bookmark text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Thư viện</p>
     </a>
-    <a href="/upgrade" class="sidebar-item group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
+    <a href="/upgrade" class="sidebar-item upgrade group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
       <i class="fa-solid fa-crown text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Nâng cấp</p>
     </a>

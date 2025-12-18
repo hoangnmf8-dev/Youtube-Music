@@ -1,9 +1,9 @@
 import "../assets/login.css";
 import escapeHTML from "../utils/escapeHTML";
-import { register, login } from "../service/auth";
+import { register, login } from "../service/authApi";
 import { router } from "../route/router";
-import toggleLoading from "../utils/toggle_lodaing";
-import showToast from "../utils/show_toast";
+import toggleLoading from "../utils/toggleLodaing";
+import showToast from "../utils/showToast";
 
 function Login() {
   return `
@@ -331,6 +331,12 @@ const validateForm = () => {
 };
 
 export const afterRenderLogin = () => {
+  toggleLoading(true);
+  $(".sidebar-item.active")?.classList.remove("active");
+  $(".sidebar-item.sidebar-slide-nav-item.active")?.classList.remove("active");
+  setTimeout(() => {
+    toggleLoading(false);
+  }, 1000);
   disPlayForm();
   validateForm();
 };

@@ -10,7 +10,7 @@ export const login = async (payload) => {
   return response.data;
 }
 
-export const getProfile = async (payload) => {
+export const getProfile = async () => {
   const response = await httpRequest.get("/auth/me");
   return response.data;
 }

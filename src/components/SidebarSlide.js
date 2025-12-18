@@ -66,19 +66,19 @@ const $ = document.querySelector.bind(document);
 const renderBeforeLogin = () => {
   const sidebarSlideNav = $(".sidebar-slide-nav");
   sidebarSlideNav.innerHTML = `
-    <a href="/" data-navigo class="sidebar-slide-nav-item active w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="/" data-navigo class="sidebar-slide-nav-item home w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-regular fa-house text-xl"></i>
       <span>Trang chủ</span>
     </a>
-    <a href="/explore" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="/explore" data-navigo class="sidebar-slide-nav-item explore w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-regular fa-compass text-xl"></i>
       <span>Khám phá</span>
     </a>
-    <a href="/library" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="/library" data-navigo class="sidebar-slide-nav-item library w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-regular fa-bookmark text-xl"></i>
       <span>Thư viện</span>
     </a>
-    <a href="/upgrade" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="/upgrade" data-navigo class="sidebar-slide-nav-item upgrade w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-solid fa-crown text-xl"></i>
       <span>Nâng cấp</span>
     </a>
@@ -91,19 +91,19 @@ const renderBeforeLogin = () => {
 const renderAfterLogin = () => {
   const sidebarSlideNav = $(".sidebar-slide-nav");
   sidebarSlideNav.innerHTML = `
-    <a href="/" data-navigo class="sidebar-slide-nav-item active w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="/" data-navigo class="sidebar-slide-nav-item home w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-regular fa-house text-xl"></i>
       <span>Trang chủ</span>
     </a>
-    <a href="/explore" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="/explore" data-navigo class="sidebar-slide-nav-item explore w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-regular fa-compass text-xl"></i>
       <span>Khám phá</span>
     </a>
-    <a href="/library" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="/library" data-navigo class="sidebar-slide-nav-item library w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-regular fa-bookmark text-xl"></i>
       <span>Thư viện</span>
     </a>
-    <a href="#" data-navigo class="sidebar-slide-nav-item w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="#" data-navigo class="sidebar-slide-nav-item upgrade w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-solid fa-crown text-xl"></i>
       <span>Nâng cấp</span>
     </a>`;
