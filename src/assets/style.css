@@ -30,21 +30,18 @@ button {
   #header .toast.show{
     @apply fixed top-[100px] right-0 min-w-[200px] rounded-lg text-white text-sm text-center px-5 py-3;
     transform: translateX(calc(100% + 20px));
-    animation: slide_show 2s ease-in-out;
+    animation: slide_show 2s ease-out;
   }
 
   @keyframes slide_show {
-    0% {
-      transform: translateX(100%);
-    }
     10% {
-      transform: translateX(-10px); 
+      transform: translateX(-30px); 
     }
     70% {
-      transform: translateX(-10px);
+      transform: translateX(-30px);
     }
     85% {
-      transform: translateX(-30px); 
+      transform: translateX(-50px); 
     }
     100% {
       transform: translateX(100%);
@@ -67,4 +64,13 @@ button {
       rotate: 360deg;
     }
   }
+
+  #header .header-user .drop-menu {
+    @apply opacity-0 pointer-events-none translate-y-2;
+  }
+
+  #header .header-user .drop-menu.show {
+    @apply opacity-100 pointer-events-auto translate-y-0;
+  }
+
 }

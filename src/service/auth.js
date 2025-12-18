@@ -10,3 +10,17 @@ export const login = async (payload) => {
   return response.data;
 }
 
+export const getProfile = async (payload) => {
+  const response = await httpRequest.get("/auth/me");
+  return response.data;
+}
+
+export const updateProfile = async (payload) => {
+  const response = await httpRequest.patch("/auth/me", payload);
+  return response.data;
+}
+
+export const updatePassword = async (payload) => {
+  const response = await httpRequest.patch("/auth/change-password", payload);
+  return response.data;
+}

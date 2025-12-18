@@ -4,7 +4,7 @@ import { router } from "../route/router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 let refreshPromise = null;
 
-const logout = () => {
+export const logout = () => {
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
   router.navigate("/login");
