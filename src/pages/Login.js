@@ -321,7 +321,9 @@ const validateForm = () => {
         if (+error.status === 400) {
           showToast(false, "Email hoặc mật khẩu không đúng! Vui lòng thử lại");
         } else {
-          showToast(false, error.message);
+          if(error.message === "Network Error") {
+            showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
+          } 
         }
       } finally {
         toggleLoading(false);

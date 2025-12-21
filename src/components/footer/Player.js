@@ -1,6 +1,6 @@
 function Player() {
   return `
-    <div class="footer-song">
+    <div id="player" class="footer-song hidden">
       <div class="footer-song-controls">
         <div class="relative">
           <input
@@ -9,7 +9,7 @@ function Player() {
             max="100"
             step="1"
             value="0"
-            class="footer-song-bar absolute top-1/2 -translate-y-1/2 w-full cursor-pointer accent-red-500 h-1"
+            class="footer-song-bar progress absolute top-1/2 -translate-y-1/2 w-full cursor-pointer accent-red-500 h-1"
           />
         </div>
 
@@ -17,22 +17,22 @@ function Player() {
           class="footer-song-player bg-[#212121] h-[75px] flex items-center justify-between px-2 py-4"
         >
           <div class="flex items-center lg:ml-5 lg:gap-3">
-            <button class="hidden sm:block p-3 hover:bg-slate-500 rounded-full transition-all duration-200 cursor-pointer">
+            <button class="btn-prev hidden sm:block p-3 hover:bg-slate-500 rounded-full transition-all duration-200 cursor-pointer">
               <i class="fa-solid fa-backward-step text-xl"></i>
             </button>
             <button class="p-3 hover:bg-slate-500 rounded-full transition-all duration-200 cursor-pointer">
-              <div class="hidden"><i class="fa-solid fa-pause text-3xl"></i></div>
-              <div><i class="fa-solid fa-play text-3xl"></i></div>
+              <div class="btn-pause hidden"><i class="fa-solid fa-pause text-3xl"></i></div>
+              <div class="btn-play"><i class="fa-solid fa-play text-3xl"></i></div>
             </button>
-            <button class="hidden sm:block p-3 hover:bg-slate-500 rounded-full transition-all duration-200 cursor-pointer">
+            <button class="btn-next hidden sm:block p-3 hover:bg-slate-500 rounded-full transition-all duration-200 cursor-pointer">
               <i class="fa-solid fa-forward-step text-xl"></i>
             </button>
             <div
               class="footer-song-time hidden md:hidden lg:flex items-center gap-1 text-sm text-gray-300"
             >
-              <span class="song-time-current">1:20</span>
+              <span class="current">1:20</span>
               <span>/</span>
-              <span class="song-time-duration">7:05</span>
+              <span class="duration">7:05</span>
             </div>
           </div>
 
@@ -40,11 +40,11 @@ function Player() {
             <img
               src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482812Fuv/anh-mo-ta.png"
               alt=""
-              class="block w-10 aspect-square rounded-md"
+              class="thumb block w-10 aspect-square rounded-md"
             />
             <div class="song-infor">
               <h3
-                class="song-infor-title font-semibold text-[14px] sm:text-base truncate"
+                class="song-infor-title title font-semibold text-[14px] sm:text-base truncate"
               >
                 Nhạc Acoustic Album 16 - Bài 5
               </h3>
@@ -93,21 +93,24 @@ function Player() {
           <div
             class="song-controls-right hidden md:flex items-center gap-8 lg:mr-5 relative"
           >
-            <button class="song-volume relative flex gap-1 items-center group">
+            <button class="song-volume relative flex gap-1 items-center group before:content-[''] before:absolute before:left-[-20px] before:top-1/2 before:-translate-y-1/2 before:w-5 before:h-5 before:rounded-full before:bg-transparent"">
               <div
                 class="song-volume-wrapper px-1 max-h-[20px] rounded-3xl bg-[#4a4949] flex items-center opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 absolute top-1/2 -translate-y-1/2 -translate-x-[140px] pointer-events-none"
               >
-                <input type="range" class="accent-white cursor-pointer" />
+                <input type="range" class="progress-volume accent-white cursor-pointer" />
               </div>
-              <div class="song-volume-icon hover:bg-slate-600 hover:cursor-pointer transition-all duration-200 p-2 rounded-full"><i class="fa-solid fa-volume-low text-xl"></i></div>
-              <div class="song-volume-icon hover:bg-slate-600 hover:cursor-pointer transition-all duration-200 p-2 rounded-full hidden"><i class="fa-solid fa-volume-high text-lg md:text-xl"></i></div>
-              <div class="song-volume-icon hover:bg-slate-600 hover:cursor-pointer transition-all duration-200 p-2 rounded-full hidden"><i class="fa-solid fa-volume-xmark text-xl"></i></div>
+              <div class="song-volume-icon volume-low hover:bg-slate-600 hover:cursor-pointer transition-all duration-200 p-2 rounded-full"><i class="fa-solid fa-volume-low text-xl"></i></div>
+              <div class="song-volume-icon volume-high hover:bg-slate-600 hover:cursor-pointer transition-all duration-200 p-2 rounded-full hidden"><i class="fa-solid fa-volume-high text-lg md:text-xl"></i></div>
+              <div class="song-volume-icon volume-mute hover:bg-slate-600 hover:cursor-pointer transition-all duration-200 p-2 rounded-full hidden"><i class="fa-solid fa-volume-xmark text-xl"></i></div>
             </button>
-            <button class="song-repeat cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
+            <button class="song-repeat btn-repeat cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
               <i class="fa-solid fa-repeat text-lg md:text-xl"></i>
             </button>
-            <button class="song-random cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
+            <button class="song-random btn-random cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
               <i class="fa-solid fa-shuffle text-lg md:text-xl"></i>
+            </button>
+            <button class="song-close btn-random cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
+              <i class="fa-solid fa-close text-lg md:text-xl"></i>
             </button>
           </div>
         </div>

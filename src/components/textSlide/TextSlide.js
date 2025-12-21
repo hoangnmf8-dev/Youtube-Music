@@ -1,5 +1,5 @@
-import "../assets/text_slide.css";
-function TextSlide(data) {
+import "../../assets/text_slide.css";
+function TextSlide(data, path) {
   return `
     <div class="section-heading relative">
       <h2
@@ -9,7 +9,7 @@ function TextSlide(data) {
       <div
         class="section-controls absolute -top-[10px] -translate-y-full right-0 flex gap-2"
       >
-        <button class="section-controls-btn active back">
+        <button class="section-controls-btn back">
           <i class="fa-solid fa-chevron-left text-xs"></i>
         </button>
         <button class="section-controls-btn next">
@@ -22,7 +22,8 @@ function TextSlide(data) {
       ${data.map(({name, slug}) => `
          <a
           href="/moods/${slug}"
-          class="section-body-item flex items-center px-3 py-2 rounded-lg text-sm shrink-0 cursor-pointer bg-white/10 text-white hover:bg-white/20"
+          data-navigo
+          class="section-body-item flex items-center px-3 py-2 rounded-lg text-sm shrink-0 cursor-pointer ${path === slug ? "text-black bg-white" : "bg-white/10 text-white"} hover:bg-white/20"
           >${name}</a
         >
       `).join("")}

@@ -1,0 +1,41 @@
+export default function calcListTime(time) {
+  let hour, minute, result;
+  hour = Math.floor(time / 3600);
+  if(time > 3600 && time % 3600 !== 0) {
+    minute = Math.floor((time - hour * 3600) / 60);
+  } else if(time % 3600 === 0 && time !== 0) {
+    minute = 0;
+  } else {
+    minute = Math.floor(time / 60);
+  }
+  
+  if(minute === 0) {
+    result = `${hour} giờ`;
+  } else {
+    result = `${hour} giờ ${minute} phút`;
+  }
+  return result;
+}
+
+export const calcSongTime = (time) => {
+  let minute, second, result;
+  minute = Math.floor(time / 60);
+  if(time > 60 && time % 60 !== 0) {
+    second = (time - minute * 60);
+  } else if(time % 60 === 0 && time !== 0) {
+    second = 0;
+  } else {
+    second = time;
+  }
+  
+  if(minute === 0) {
+    minute = "00";
+  }
+  if(second === 0) {
+    second = "00";
+  } else if(second < 10) {
+    second = `0${second}`
+  }
+  result = `${minute}:${second}`;
+  return result;
+}

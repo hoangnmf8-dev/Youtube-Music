@@ -3,7 +3,7 @@ import escapeHTML from "../../utils/escapeHTML.js";
 import moodCard from "./moodCard.js";
 import quickpickCard from "./quickpickCard.js";
 
-function QuickPickSlide(title, path, data) {
+function QuickPickSlide(title, path, type, data) {
   const newData = [];
   for(let i = 0; i < Math.ceil(data.length / 4); i++) {
     newData.push(data.slice(i * 4, i * 4 + 4));
@@ -18,7 +18,7 @@ function QuickPickSlide(title, path, data) {
       <div
         class="section-controls absolute top-1/2 -translate-y-1/2 right-0 flex gap-2"
       >
-        <button class="section-controls-btn active back">
+        <button class="section-controls-btn back">
           <i class="fa-solid fa-chevron-left text-xs"></i>
         </button>
         <button class="section-controls-btn next">
@@ -28,7 +28,13 @@ function QuickPickSlide(title, path, data) {
     </div>
 
     <div class="section-body flex overflow-x-auto gap-4 scrollbar-pill pb-10">
-      ${newData.map(item => `${quickpickCard(item, path)}`).join("")}
+      ${newData.map(item => {
+        if(type === "quickpick") {
+          return `${quickpickCard(item, path)}`;
+        } else if(type === "moodcards") {
+          return `${moodCard(item, path)}`;
+        }
+      }).join("")}
     </div>
   `;
 }

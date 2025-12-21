@@ -1,19 +1,22 @@
+import "../assets/quickpick_slide.css";
 import Navigo from "navigo";
 import { router } from "../route/router";
 import getAccessToken from "../utils/getToken";
-import escapeHTML from "../utils/escapeHTML";
 import { getProfile } from "../service/authApi";
-import { getMoods } from "../service/moodsApi";
+import { getHomeMoods } from "../service/moodsApi";
+import { getPersonalized } from "../service/personalizedApi";
 import { getQuickPicks } from "../service/quickpicksApi";
-import { getAlbums } from "../service/albumsApi";
+import { getHomeAlbums } from "../service/albumsApi";
 import { getTodayHit } from "../service/todayHitApi";
 import { getPlaylistCountry } from "../service/countryApi";
+import escapeHTML from "../utils/escapeHTML";
 import toggleLoading from "../utils/toggleLodaing";
+import handleBeforeRender from "../utils/handleBeforeRender";
 import showToast from "../utils/showToast";
-import TextSlide from "../components/TextSlide";
+import controlSlide from "../utils/controlSlide";
+import TextSlide from "../components/textSlide/TextSlide";
 import QuickPickSlide from "../components/quickpickSlide/QuickPickSlide";
 import SongSlide from "../components/SongSlide/SongSlide";
-import { getPersonalized } from "../service/personalizedApi";
 
 function Home() {
   return `
@@ -49,9 +52,9 @@ const render = async () => {
   const countrySection = $("#home-country");
 
   //Lấy dữ liệu
-  const moodsData = await getMoods();
+  const moodsData = await getHomeMoods();
   const quickPicksData = await getQuickPicks();
-  const albumsData = await getAlbums();
+  const albumsData = await getHomeAlbums();
   const todayHitData = await getTodayHit();
   const countryData = await getPlaylistCountry();
 
@@ -60,16 +63,27 @@ const render = async () => {
   quickPickSection.innerHTML = `${QuickPickSlide(
     "Quick Picks",
     "/playlists/details",
+    "quickpick",
     quickPicksData
   )}`;
-  albumsSection.innerHTML = `${SongSlide("Album gợi ý cho bạn", "/albums/details", albumsData)}`;
-  todayHitSection.innerHTML = `${SongSlide("Today's Hits", "/playlists/details",todayHitData)}`;
-  countrySection.innerHTML = `${SongSlide("Nhạc Việt", "/playlists/details", countryData)}`;
-}
-
-const renderBeforeLogin = async () => {
-  
+  albumsSection.innerHTML = `${SongSlide(
+    "Album gợi ý cho bạn",
+    "/albums/details",
+    albumsData
+  )}`;
+  todayHitSection.innerHTML = `${SongSlide(
+    "Today's Hits",
+    "/playlists/details",
+    todayHitData
+  )}`;
+  countrySection.innerHTML = `${SongSlide(
+    "Nhạc Việt",
+    "/playlists/details",
+    countryData
+  )}`;
 };
+
+const renderBeforeLogin = async () => {};
 
 const renderAfterLogin = async () => {
   const homeTitle = $("#home-title");
@@ -77,33 +91,45 @@ const renderAfterLogin = async () => {
 
   const profileData = await getProfile();
   const personalizedData = await getPersonalized();
-  
-  homeTitle.innerHTML = `<span>👋 Chào mừng ${escapeHTML(profileData.name)}</span>`;
-  homeRelease.innerHTML = `${QuickPickSlide("Nghe gần đây", "/albums/details", personalizedData)}`
 
+  homeTitle.innerHTML = `<span>👋 Chào mừng ${escapeHTML(
+    profileData.name
+  )}</span>`;
+  homeRelease.innerHTML = `${QuickPickSlide(
+    "Nghe gần đây",
+    "/playlists/details",
+    "quickpick",
+    personalizedData
+  )}`;
+};
+
+const controlScroll = () => {
+  controlSlide("#home-moods");
+  if ($("#home-release").querySelector(".section-body")) {
+    controlSlide("#home-release");
+  }
+  controlSlide("#home-quickpick");
+  controlSlide("#home-albums");
+  controlSlide("#home-today-hits");
+  controlSlide("#home-country");
 };
 
 export const afterRenderHome = async () => {
+  //Xử lý trước khi render
+  handleBeforeRender("home");
   try {
-    //Xử lý trước khi render
-    toggleLoading(true);
-    const sidebarBtn = $(".sidebar-item.home");
-    const sidebarSlideBtn = $(".sidebar-slide-nav-item.home");
-    $(".sidebar-item.active")?.classList.remove("active");
-    $(".sidebar-item.sidebar-slide-nav-item.active")?.classList.remove(
-      "active"
-    );
-    sidebarBtn.classList.add("active");
-    sidebarSlideBtn.classList.add("active");
     await render();
     if (getAccessToken()) {
       await renderAfterLogin();
     } else {
       await renderBeforeLogin();
     }
+    controlScroll();
     router.updatePageLinks();
   } catch (error) {
-    showToast(false, error.message);
+    if (error.message === "Network Error") {
+      showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
+    }
   } finally {
     toggleLoading(false);
   }

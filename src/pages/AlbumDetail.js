@@ -1,5 +1,5 @@
-import lineSong from "../components/lineSong"
-import SongInfor from "../components/SongInfor";
+import lineSong from "../components/listDetail/LineList";
+import SongInfor from "../components/listDetail/SongInfor";
 
 function AlbumDetail() {
   return `
@@ -16,8 +16,7 @@ function AlbumDetail() {
         </div>
       </div>
     </div>
-  `
+  `;
 }
-
 
 export default AlbumDetail;

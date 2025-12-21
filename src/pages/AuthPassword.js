@@ -184,7 +184,9 @@ const updatePasswordUser = async () => {
         if (+error.status === 400) {
           showToast(false, "Mật khẩu hiện tại không chính xác");
         } else {
-          showToast(false, error.message);
+          if(error.message === "Network Error") {
+            showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
+          }
         }
       } finally {
         toggleLoading(false);

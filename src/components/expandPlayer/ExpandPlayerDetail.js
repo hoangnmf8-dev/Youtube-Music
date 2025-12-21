@@ -1,4 +1,7 @@
-function ExpandPlayerDetail() {
+import escapeHTML from "../../utils/escapeHTML";
+import { calcSongTime } from "../../utils/calcListTime";
+
+function ExpandPlayerDetail(data = []) {
   return `
     <div class="flex-1 overflow-y-auto max-h-screen pr-2">
       <h3
@@ -10,13 +13,15 @@ function ExpandPlayerDetail() {
         id="exp-related-list"
         class="flex flex-col overflow-y-auto overscroll-y-contain"
       >
+       ${data.map(item => `
         <div
-          class="track-item flex items-center gap-4 p-3 rounded-lg text-white hover:bg-white/10 cursor-pointer transition group"
-          data-track-id="691cb501dd97648f597579f8"
+          class="song-detail-item flex items-center gap-4 p-3 rounded-lg text-white hover:bg-white/10 cursor-pointer transition group"
+          data-src="${item.audioUrl}"
+          data-id="${item._id}"
         >
           <div class="relative">
             <img
-              src="https://picsum.photos/seed/album-nhc-in-t-album-9-8/400/400"
+              src="${escapeHTML(item.thumbnails[0])}"
               class="w-12 h-12 rounded-lg object-cover"
             />
 
@@ -32,12 +37,13 @@ function ExpandPlayerDetail() {
             </div>
           </div>
           <div class="flex flex-col flex-1">
-            <div class="font-semibold">Nhạc Điện Tử Album 9 - Bài 2</div>
+            <div class="font-semibold">${escapeHTML(item.title)}</div>
             <div class="text-sm text-white/60">Không rõ nghệ sĩ</div>
           </div>
 
-          <div class="text-sm text-white/50">2:36</div>
+          <div class="text-sm text-white/50">${escapeHTML(calcSongTime(item.duration))}</div>
         </div>
+        `).join("")}
       </div>
     </div>
   `

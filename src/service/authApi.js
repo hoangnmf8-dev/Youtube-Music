@@ -12,7 +12,7 @@ export const login = async (payload) => {
 
 export const getProfile = async () => {
   const response = await httpRequest.get("/auth/me");
-  return response.data;
+  return response?.data;
 }
 
 export const updateProfile = async (payload) => {

@@ -4,10 +4,10 @@ import "@fontsource/roboto";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import App from "./app";
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
-import SidebarSlide from "./components/SidebarSlide";
-import Footer from "./components/Footer";
+import Header from "./components/webComponents/Header";
+import Sidebar from "./components/webComponents/Sidebar";
+import SidebarSlide from "./components/webComponents/SidebarSlide";
+import Footer from "./components/footer/Footer";
 import initRouter from "./route/router";
 
 const root = document.querySelector("#root");
@@ -18,6 +18,7 @@ const init = () => {
     ${Sidebar()}
     ${SidebarSlide()}
     ${App()}
+    ${Footer()}
   `;
 };
 init();

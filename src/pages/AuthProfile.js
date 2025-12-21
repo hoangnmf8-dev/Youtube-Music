@@ -129,7 +129,12 @@ const upadteUser = async () => {
           showToast(true, "Cập nhật thông tin thành công");
           router.navigate("/");
         } catch (error) {
-          showToast(false, error.message);
+          if (error.message === "Network Error") {
+            showToast(
+              false,
+              "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!"
+            );
+          }
         } finally {
           toggleLoading(false);
         }

@@ -1,9 +1,9 @@
-import "../assets/style.css";
-import { router } from "../route/router";
-import { getProfile } from "../service/authApi";
-import { logout } from "../service/httpRequest";
-import showToast from "../utils/showToast";
-import toggleLoading from "../utils/toggleLodaing";
+import "../../assets/style.css";
+import { router } from "../../route/router";
+import { getProfile } from "../../service/authApi";
+import { logout } from "../../service/httpRequest";
+import showToast from "../../utils/showToast";
+import toggleLoading from "../../utils/toggleLodaing";
 function Header() {
   return `
     <header
@@ -140,7 +140,7 @@ const $ = document.querySelector.bind(document);
 const renderBeforeLogin = () => {
   const headerUserBtn = $("#header .header-user");
   headerUserBtn.innerHTML = `
-    <a href="/login" class="rounded-full bg-white text-sm font-semibold text-black px-5 py-3 cursor-pointer hover:bg-gray-300 transition-all duration-150">Đăng nhập</a>
+    <a href="/login" class="min-w-30 rounded-full bg-white text-sm font-semibold text-black px-5 py-3 cursor-pointer hover:bg-gray-300 transition-all duration-150">Đăng nhập</a>
   `;
 };
 
