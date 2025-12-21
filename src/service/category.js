@@ -9,3 +9,8 @@ export const getLine = async () => {
   const response = await httpRequest.get("/lines");
   return response.data;
 }
+
+export const getCategoriesDetail = async (slug) => {
+  const response = await httpRequest.get(`/categories/${slug}`);
+  return response.data;
+}

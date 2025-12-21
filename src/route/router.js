@@ -10,6 +10,7 @@ import Explore, { afterRenderExplore } from "../pages/Explore";
 import NewReleases, { afterRenderNewReleases } from "../pages/NewReleases";
 import Chart, { afterRenderChart } from "../pages/Chart";
 import MoodAndGenres, {afterRenderMoodAndGenres} from "../pages/MoodAndGenres";
+import CategoriesDetail, {afterRenderCategoriesDetail} from "../pages/CategoriesDetail";
 import Library from "../pages/Library";
 import AlbumDetail, { afterRenderAlbumDetail } from "../pages/AlbumDetail";
 import { afterRenderHeader } from "../components/webComponents/Header";
@@ -88,6 +89,14 @@ const initRouter = async () => {
       afterRenderSidebar();
       afterRenderSidebarSlide();
       afterRenderMoodAndGenres();
+      afterRenderFooter();
+    })
+    .on("/categories/:slug", ({data}) => {
+      main.innerHTML = CategoriesDetail();
+      afterRenderHeader();
+      afterRenderSidebar();
+      afterRenderSidebarSlide();
+      afterRenderCategoriesDetail(data.slug);
       afterRenderFooter();
     })
     .on("/library", () => {

@@ -5,8 +5,8 @@ import toggleLoading from "../utils/toggleLodaing";
 import handleBeforeRender from "../utils/handleBeforeRender";
 import showToast from "../utils/showToast";
 import controlSlide from "../utils/controlSlide";
-import { getCategories, getLine } from "../service/category";
 
+import { getCategories, getLine } from "../service/category";
 import QuickPickSlide from "../components/quickpickSlide/QuickPickSlide";
 
 export default function MoodAndGenres() {
@@ -30,7 +30,15 @@ const render = async () => {
   //Lấy dữ liệu
   const categoriesData = await getCategories();
   const linesData = await getLine();
-  moodsSection.innerHTML = `${QuickPickSlide("Tâm trạng và khoảnh khắc", "/categories", "quickpick", categoriesData.items)}`;
+  
+  //Render
+  moodsSection.innerHTML = `${QuickPickSlide("Tâm trạng và khoảnh khắc", "/categories", "moodcards", categoriesData.items)}`;
+  genreSection.innerHTML = `${QuickPickSlide("Dòng nhạc", "/categories", "moodcards", linesData.items)}`
+}
+
+const controlScroll = () => {
+  controlSlide("#moods-section");
+  controlSlide("#genre-section");
 }
 
 export const afterRenderMoodAndGenres = async () => {
