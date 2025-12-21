@@ -1,4 +1,5 @@
 import escapeHTML from "../../utils/escapeHTML";
+import calcViews from "../../utils/calcViews";
 
 function SongSlide(title, path, data) {
   return `
@@ -23,7 +24,7 @@ function SongSlide(title, path, data) {
     <div class="section-body flex overflow-x-auto gap-6 scrollbar-pill pb-10">
       ${data.map(item => `
         <div class="flex flex-col gap-8 shrink-0 ${item.videoId ? "lg:min-w-1/4" : ""}">
-          <a href="${path}/${escapeHTML(item.slug)}" data-navigo class="item w-40 ${item.videoId ? "lg:w-full": "lg:w-[220px]"}   shrink-0 cursor-pointer">
+          <a href="${path}/${escapeHTML(item.id || item.slug)}" data-navigo class="item w-40 ${item.videoId ? "lg:w-full": "lg:w-[220px]"}   shrink-0 cursor-pointer">
             <div class="img mb-2 overflow-hidden rounded-md relative group">
               <img
                 class="block ${item.videoId ? "aspect-[3/2]" : "aspect-square"} group-hover:brightness-50 transition-all duration-150 object-cover"
@@ -35,7 +36,7 @@ function SongSlide(title, path, data) {
               ></i>
             </div>
             <h3 class="item-name mb-2 text-white font-medium truncate">${escapeHTML(item.title || item.name)}</h3>
-            <p class="item-artists text-gray-400 text-sm truncate">${escapeHTML(item.albumType || `${Math.floor(item.views / 1000)} N lượt xem` ||item.artists[0])}</p>
+            <p class="item-artists text-gray-400 text-sm truncate">${escapeHTML(item.albumType || `${calcViews(item.views)} lượt xem` ||item.artists[0])}</p>
           </a>
         </div>  
       `).join("")}

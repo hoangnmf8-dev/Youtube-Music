@@ -1,7 +1,7 @@
 import escapeHTML from "../../utils/escapeHTML";
 import { calcSongTime } from "../../utils/calcListTime";
 
-function LineSong(type, data) {
+function LineList(type, data) {
   return `
     ${data
       .tracks.map(
@@ -28,4 +28,4 @@ function LineSong(type, data) {
   `;
 }
 
-export default LineSong;
+export default LineList;

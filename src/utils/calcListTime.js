@@ -39,3 +39,15 @@ export const calcSongTime = (time) => {
   result = `${minute}:${second}`;
   return result;
 }
+
+export const formatDateDDMMYYYY = (isoString) => {
+  const d = new Date(isoString);
+  if (Number.isNaN(d.getTime())) return "";
+  const vn = new Date(d.toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }));
+
+  const dd = String(vn.getDate()).padStart(2, "0");
+  const mm = String(vn.getMonth() + 1).padStart(2, "0");
+  const yyyy = vn.getFullYear();
+
+  return `${dd}/${mm}/${yyyy}`;
+}

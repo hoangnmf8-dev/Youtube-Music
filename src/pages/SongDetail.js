@@ -35,11 +35,10 @@ const render = async (slug) => {
 
   //Lấy dữ liệu
   const songDetailData = await getSongDetail(slug);
-
   songInfor.innerHTML = `${SongInforDetail(
-    songDetailData.playlists[0].tracks[0]
+    songDetailData.album.tracks[0] || songDetailData.playlists[0].tracks[0]
   )}`;
-  songDetail.innerHTML = `${LineSong(songDetailData.playlists[0].tracks)}`;
+  songDetail.innerHTML = `${LineSong(songDetailData.album.tracks || songDetailData.playlists[0].tracks)}`;
 
   await handleEvent(songDetailData.playlists[0].tracks);
 

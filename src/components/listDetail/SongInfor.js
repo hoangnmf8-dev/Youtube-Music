@@ -1,5 +1,6 @@
 import escapeHTML from "../../utils/escapeHTML";
 import calcListTime from "../../utils/calcListTime";
+import { formatDateDDMMYYYY } from "../../utils/calcListTime";
 
 function SongInfor(type, data) {
   return `
@@ -10,16 +11,16 @@ function SongInfor(type, data) {
         alt=""
       />
       <h3 class="item-title text-white text-[20px] xl:text-[28px] font-bold text-center">${escapeHTML(data.title)}</h3>
-      <p class="text-white/70 text-lg text-center">${escapeHTML(data.description)}</p>
+      <p class="text-white/70 text-lg text-center ${type === "albums" ? "hidden" : "block"}">${escapeHTML(data.description)}</p>
       <div class="text-[14px] xl:text-base text-white/80 text-center flex flex-col gap-2">
         <p>
           <span class="item-quantity">${escapeHTML(data.tracks.length)} bài hát</span>
           <span class="mx-1">•</span>
           <span class="item-total-duration">${escapeHTML(calcListTime(data.duration))}</span>
         </p>
-        ${type === "albums" ? `<p class="item-listens">462 lượt nghe</p>
-        <p class="item-category">Loại album: Single</p>
-        <p class="item-release-date">Phát hành: 20/12/2024</p>` : `<p>Các nghệ sĩ: ${data.artists[0]}</p>`}
+        ${type === "albums" ? `<p class="item-listens">${escapeHTML(data.popularity)} lượt nghe</p>
+        <p class="item-category">Loại album: ${escapeHTML(data.albumType)}</p>
+        <p class="item-release-date">Phát hành: ${escapeHTML(formatDateDDMMYYYY("2020-11-23T17:00:00.000Z"))}</p>` : `<p>Các nghệ sĩ: ${escapeHTML(data.artists[0])}</p>`}
       </div>
     </div>
   `;

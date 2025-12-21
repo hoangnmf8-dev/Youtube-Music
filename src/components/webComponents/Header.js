@@ -146,23 +146,25 @@ const renderBeforeLogin = () => {
 
 const renderAfterLogin = async () => {
   const userProfile = await getProfile();
+  localStorage.setItem("user", JSON.stringify(userProfile));
   const headerUserBtn = $("#header .header-user");
 
   headerUserBtn.innerHTML = `
-    <button
-      class="w-10 h-10 flex items-center justify-center bg-white/20 rounded-full text-white font-semibold cursor-pointer hover:bg-white/30 transition"
-    >
-      ${userProfile.name.slice(0, 1).toUpperCase()}
-    </button>
-
-    <div
-      class="drop-menu absolute right-2 mt-2 w-52 rounded-xl overflow-hidden bg-[#1f1f1f] shadow-lg border border-white/10 transition-all duration-150 z-50"
-    >
-      <a href="/auth/profile" data-navigo class="drop-menu-item px-4 py-3 text-white block hover:bg-white/10">Thông tin người dùng</a>
-      <a href="/auth/password" data-navigo class="drop-menu-item px-4 py-3 text-white block hover:bg-white/10">Đổi mật khẩu</a>
-      <a href="" data-navigo class="drop-menu-item logout px-4 py-3 text-red-500 block hover:bg-white/10">Đăng xuất</a>
-    </div>
-  `;
+      <button
+        id="header-profile"
+        class="w-10 h-10 flex items-center justify-center bg-white/20 rounded-full text-white font-semibold cursor-pointer hover:bg-white/30 transition"
+      >
+        ${userProfile.name.slice(0, 1).toUpperCase()}
+      </button>
+  
+      <div
+        class="drop-menu absolute right-2 mt-2 w-52 rounded-xl overflow-hidden bg-[#1f1f1f] shadow-lg border border-white/10 transition-all duration-150 z-50"
+      >
+        <a href="/auth/profile" data-navigo class="drop-menu-item px-4 py-3 text-white block hover:bg-white/10">Thông tin người dùng</a>
+        <a href="/auth/password" data-navigo class="drop-menu-item px-4 py-3 text-white block hover:bg-white/10">Đổi mật khẩu</a>
+        <a href="" data-navigo class="drop-menu-item logout px-4 py-3 text-red-500 block hover:bg-white/10">Đăng xuất</a>
+      </div>
+    `;
   const dropMenu = $("#header .header-user .drop-menu");
   headerUserBtn.addEventListener("click", (e) => {
     dropMenu.classList.toggle("show");

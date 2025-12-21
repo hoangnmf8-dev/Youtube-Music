@@ -3,7 +3,7 @@ function controlSlide(id) {
   const slide = $(`${id} .section-body`);
   const btnNext = slide.closest(id).querySelector(".section-controls-btn.next");
   const btnBack = slide.closest(id).querySelector(".section-controls-btn.back");
-  const stepScroll = slide.clientWidth * 10 / 100;
+  const stepScroll = slide.clientWidth * 25 / 100;
 
   if(+slide.clientWidth === +slide.scrollWidth) {
     btnBack.classList.remove("active");

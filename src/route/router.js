@@ -7,8 +7,11 @@ import MoodsDetail, {afterRenderMoodsDetail} from "../pages/MoodsDetail";
 import PlaylistDetail, {afterRenderPlaylistDetail} from "../pages/PlaylistDetail";
 import SongDetail, { afterRenderSongDetail } from "../pages/SongDetail";
 import Explore, { afterRenderExplore } from "../pages/Explore";
+import NewReleases, { afterRenderNewReleases } from "../pages/NewReleases";
+import Chart, { afterRenderChart } from "../pages/Chart";
+import MoodAndGenres, {afterRenderMoodAndGenres} from "../pages/MoodAndGenres";
 import Library from "../pages/Library";
-import AlbumDetail from "../pages/AlbumDetail";
+import AlbumDetail, { afterRenderAlbumDetail } from "../pages/AlbumDetail";
 import { afterRenderHeader } from "../components/webComponents/Header";
 import { afterRenderSidebar } from "../components/webComponents/Sidebar";
 import { afterRenderSidebarSlide } from "../components/webComponents/SidebarSlide";
@@ -63,6 +66,30 @@ const initRouter = async () => {
       afterRenderExplore();
       afterRenderFooter();
     })
+    .on("/new-releases", () => {
+      main.innerHTML = NewReleases();
+      afterRenderHeader();
+      afterRenderSidebar();
+      afterRenderSidebarSlide();
+      afterRenderNewReleases();
+      afterRenderFooter();
+    })
+    .on("/charts", () => {
+      main.innerHTML = Chart();
+      afterRenderHeader();
+      afterRenderSidebar();
+      afterRenderSidebarSlide();
+      afterRenderChart();
+      afterRenderFooter();
+    })
+    .on("/moods-and-genres", () => {
+      main.innerHTML = MoodAndGenres();
+      afterRenderHeader();
+      afterRenderSidebar();
+      afterRenderSidebarSlide();
+      afterRenderMoodAndGenres();
+      afterRenderFooter();
+    })
     .on("/library", () => {
       main.innerHTML = Library();
       afterRenderHeader();
@@ -100,11 +127,12 @@ const initRouter = async () => {
       afterRenderAuthPassword();
       afterRenderFooter();
     })
-    .on("/albums/details/:slug", () => {
+    .on("/albums/details/:slug", ({data}) => {
       main.innerHTML = AlbumDetail();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
+      afterRenderAlbumDetail(data.slug);
       afterRenderFooter();
     })
     .resolve();
