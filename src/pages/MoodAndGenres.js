@@ -33,7 +33,7 @@ const render = async () => {
   
   //Render
   moodsSection.innerHTML = `${QuickPickSlide("Tâm trạng và khoảnh khắc", "/categories", "moodcards", categoriesData.items)}`;
-  genreSection.innerHTML = `${QuickPickSlide("Dòng nhạc", "/categories", "moodcards", linesData.items)}`
+  genreSection.innerHTML = `${QuickPickSlide("Dòng nhạc", "/lines", "moodcards", linesData.items)}`
 }
 
 const controlScroll = () => {

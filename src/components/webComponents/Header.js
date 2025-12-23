@@ -2,6 +2,8 @@ import "../../assets/style.css";
 import { router } from "../../route/router";
 import { getProfile } from "../../service/authApi";
 import { logout } from "../../service/httpRequest";
+import { getSearch } from "../../service/searchApi";
+import escapeHTML from "../../utils/escapeHTML";
 import showToast from "../../utils/showToast";
 import toggleLoading from "../../utils/toggleLodaing";
 function Header() {
@@ -62,26 +64,29 @@ function Header() {
 
           <div class="flex items-center gap-4 md:justify-between md:flex-1">
             <div
-              class="hidden md:flex items-center bg-[#292929]/80 backdrop-blur-sm px-4 py-1.5 lg:py-2.5 rounded w-[290px] lg:w-[470px] relative"
+              class="search-wrapper hidden md:flex items-center gap-2 bg-[#292929] backdrop-blur-sm px-4 py-1.5 lg:py-2.5 rounded md:w-[290px] lg:w-[470px] md:static md:top-auto md:left-auto md:translate-x-0 md:translate-y-0  absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[95%]"
             >
-              <i class="fa-solid fa-magnifying-glass w-5 h-5 text-gray-300"></i>
+              <div class="search-glass hidden md:inline-block"><i class="fa-solid fa-magnifying-glass w-5 h-5 text-gray-300"></i></div>
+              <div class="search-left inline-block md:hidden cursor-pointer hover:bg-gray-500 p-2 rounded-full relative top-[2px]"><i class="fa-solid fa-arrow-left-long w-5 h-5 text-gray-300"></i></div>
               <input
                 id="navbar-search-input"
                 placeholder="Tìm bài hát, đĩa nhạc, nghệ sĩ"
                 autocomplete="off"
-                class="bg-transparent outline-none px-3 w-full text-md text-white placeholder-gray-400"
+                class="bg-transparent outline-none flex-1 px-3 text-md text-white placeholder-gray-400"
               />
 
               <button
-                id="navbar-search-clear"
-                class="hidden absolute right-3 text-gray-300 hover:text-white transition"
+                id="search-clear"
+                class="hidden text-gray-300 hover:text-white transition"
               >
                 <i class="fa-solid fa-xmark text-lg"></i>
               </button>
               <div
                 id="search-dropdown"
-                class="absolute left-0 right-0 top-full bg-[#121212] text-white rounded-lg shadow-lg mt-1 hidden z-9999"
-              ></div>
+                class="absolute p-3 left-0 right-0 top-full bg-[#121212] text-white rounded-lg shadow-lg mt-1 hidden z-9999"
+              >
+                
+              </div>
             </div>
 
             <div class="flex items-center gap-4">
@@ -146,7 +151,7 @@ const renderBeforeLogin = () => {
 
 const renderAfterLogin = async () => {
   let data;
-  if(localStorage.getItem("user")) {
+  if (localStorage.getItem("user")) {
     data = JSON.parse(localStorage.getItem("user"));
   } else {
     const data = await getProfile();
@@ -199,9 +204,150 @@ const handleLogout = () => {
   }
 };
 
+const handleSearch = () => {
+  let id;
+  return function (e) {
+    clearTimeout(id);
+    id = setTimeout(async () => {
+      const dropMenu = $("#search-dropdown");
+      const clearInput = $("#search-clear");
+      let valueInput = e.target.value.trim();
+      if (!valueInput) {
+        clearInput.classList.add("hidden");
+        return;
+      }
+      clearInput.classList.remove("hidden");
+
+      clearInput.onclick = (e) => {
+        $("#header input").value = "";
+        dropMenu.classList.add("hidden");
+        clearInput.classList.add("hidden");
+      };
+
+      const valueSearch = await getSearch(valueInput);
+      dropMenu.classList.remove("hidden");
+      if (!valueSearch.suggestions.length && !valueSearch.completed.length) {
+        dropMenu.innerHTML = `<p class="p-3 text-sm text-gray-300">Không tìm thấy kết quả</p>`;
+        return;
+      }
+      let path;
+      if (valueSearch.completed[0].type === "song") {
+        path = "/songs/details";
+      } else if (valueSearch.completed[0].type === "playlist") {
+        path = "/playlists/details";
+      } else {
+        path = "/albums/details";
+      }
+
+      dropMenu.innerHTML = `
+        <p class="text-sm text-gray-300 mb-2">Gợi ý</p>
+        <div class="max-h-80 overflow-y-auto">
+          ${valueSearch.suggestions
+            .map(
+              (item) => `
+            <div class="suggest-result px-3 py-2 hover:bg-white/10 cursor-pointer rounded text-sm" data-action="suggest" data-value="${item}">
+              ${escapeHTML(item)}
+            </div>  
+          `
+            )
+            .join("")}
+        </div>
+        <hr class="h-0.5 text-gray-600 w-full">
+        <p class="text-sm text-gray-300 mt-3 mb-2">Kết quả</p>
+        <div class="max-h-80 overflow-y-auto">
+            ${valueSearch.completed
+              .map(
+                (item) => `
+               <div data-url="${path}/${item.slug}" class="completed-result flex items-center gap-3 px-3 py-2 hover:bg-white/10 cursor-pointer rounded">
+                <img src="${item.thumbnails[0]}" class="w-12 h-12 rounded object-cover">
+                <div>
+                  <p class="font-medium">${item.title}</p>
+                  <p class="text-xs text-gray-400">${item.subtitle}</p>
+                </div>
+              </div>  
+            `
+              )
+              .join("")}
+        </div>
+      `;
+      document.querySelectorAll(".completed-result").forEach((item) => {
+        item.onclick = (e) => {
+          const url = item.dataset.url;
+          if (!url) return;
+          router.navigate(url);
+          clearInput.classList.add("hidden");
+          $("#header input").value = "";
+          dropMenu.classList.add("hidden");
+        };
+      });
+
+      document.querySelectorAll(".suggest-result").forEach((item) => {
+        item.onclick = (e) => {
+          const inputSearchEl = $("#header input");
+          const valueSuggest = valueSearch.suggestions.filter(
+            (item) => item === inputSearchEl
+          );
+          const valueCompleted = valueSearch.completed.filter(
+            (item) => item.title === inputSearchEl
+          );
+          dropMenu.innerHTML = `
+            <p class="text-sm text-gray-300 mb-2">Gợi ý</p>
+            <div class="max-h-80 overflow-y-auto">
+              ${valueSuggest
+                .map(
+                  (item) => `
+                <div class="suggest-result px-3 py-2 hover:bg-white/10 cursor-pointer rounded text-sm" data-action="suggest" data-value="${item}">
+                  ${escapeHTML(item)}
+                </div>  
+              `
+                )
+                .join("")}
+            </div>
+            <hr class="h-0.5 text-gray-600 w-full">
+            <p class="text-sm text-gray-300 mt-3 mb-2">Kết quả</p>
+            <div class="max-h-80 overflow-y-auto">
+                ${valueCompleted
+                  .map(
+                    (item) => `
+                  <div data-url="${path}/${item.slug}" class="completed-result flex items-center gap-3 px-3 py-2 hover:bg-white/10 cursor-pointer rounded">
+                    <img src="${item.thumbnails[0]}" class="w-12 h-12 rounded object-cover">
+                    <div>
+                      <p class="font-medium">${item.title}</p>
+                      <p class="text-xs text-gray-400">${item.subtitle}</p>
+                    </div>
+                  </div>  
+                `
+                  )
+                  .join("")}
+            </div>
+          `;
+        };
+      });
+      router.updatePageLinks();
+    }, 300);
+  };
+};
+
+const showInputInMobile = () => {
+  const searchIcon = $("#header .search");
+  const searchLeft = $(".search-left");
+  const headerSearchWrapper = $("#header .search-wrapper");
+  
+  searchIcon.onclick = e => {
+    headerSearchWrapper.classList.remove("hidden");
+    headerSearchWrapper.classList.add("flex");
+  }
+
+  searchLeft.onclick = e => {
+    headerSearchWrapper.classList.remove("flex");
+    headerSearchWrapper.classList.add("hidden");
+  }
+};
 export const afterRenderHeader = async () => {
   if (localStorage.getItem("access_token")) {
     await renderAfterLogin();
+    $("#header input").oninput = handleSearch();
+    showInputInMobile();
     handleLogout();
   } else {
     renderBeforeLogin();

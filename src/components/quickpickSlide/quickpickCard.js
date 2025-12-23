@@ -7,15 +7,15 @@ function quickpickCard(data, path) {
       <a href="${path}/${escapeHTML(item.slug)}" class="item flex gap-4">
       <img
         class="img block w-12 aspect-square rounded-sm object-cover"
-        src="${escapeHTML(item.thumbnails[0])}"
+        src="${escapeHTML(item.thumb ? item.thumb : item.thumbnails[0])}"
         alt=""
       />
       <div>
-        <h3 class="title text-white font-medium truncate">${escapeHTML(item.title)}</h3>
+        <h3 class="title text-white font-medium truncate">${escapeHTML(item.name || item.title)}</h3>
         <p class="infor flex items-center text-gray-400 truncate">
-          <span class="artists-name">${escapeHTML(item.artists[0])}</span>
+          <span class="artists-name">${escapeHTML(item.albumName || item.artists[0])}</span>
           <span class="dot mx-2 flex items-center">•</span>
-          <span class="listens">${escapeHTML(item.popularity)} lượt nghe</span>
+          <span class="listens">${escapeHTML(item.views || item.popularity)} lượt nghe</span>
         </p>
       </div>
     </a>  

@@ -1,7 +1,7 @@
 import escapeHTML from "../../utils/escapeHTML";
 import calcViews from "../../utils/calcViews";
 
-function SongSlide(title, path, data) {
+function SongSlide(title, path, data, type="albums") {
   return `
     <div class="section-heading relative">
       <h2
@@ -23,11 +23,11 @@ function SongSlide(title, path, data) {
 
     <div class="section-body flex overflow-x-auto gap-6 scrollbar-pill pb-10">
       ${data.map(item => `
-        <div class="flex flex-col gap-8 shrink-0 ${item.videoId ? "lg:min-w-1/4" : ""}">
-          <a href="${path}/${escapeHTML(item.id || item.slug)}" data-navigo class="item w-40 ${item.videoId ? "lg:w-full": "lg:w-[220px]"}   shrink-0 cursor-pointer">
+        <div class="flex flex-col gap-8 shrink-0 ${type === "video" ? "lg:min-w-1/4" : ""}">
+          <a href="${path}/${escapeHTML(item.id || item.slug)}" data-navigo class="item w-40 ${type === "video" ? "lg:w-full": "lg:w-[220px]"}   shrink-0 cursor-pointer">
             <div class="img mb-2 overflow-hidden rounded-md relative group">
               <img
-                class="block ${item.videoId ? "aspect-[3/2]" : "aspect-square"} group-hover:brightness-50 transition-all duration-150 object-cover"
+                class="block ${type === "video" ? "aspect-[3/2]" : "aspect-square"} group-hover:brightness-50 transition-all duration-150 object-cover"
                 src="${escapeHTML(item.thumb || item.thumbnails[0])}"
                 alt=""
               />

@@ -15,6 +15,7 @@ import Library, {afterRenderLibrary} from "../pages/Library";
 import Upgrade, {afterRenderUpgrade} from "../pages/Upgrade";
 import AlbumDetail, { afterRenderAlbumDetail } from "../pages/AlbumDetail";
 import VideoDetail, {afterRenderVideoDetail} from "../pages/VideoDetail";
+import LineDetail, {afterRenderLineDetail} from "../pages/LineDetail";
 import { afterRenderHeader } from "../components/webComponents/Header";
 import { afterRenderSidebar } from "../components/webComponents/Sidebar";
 import { afterRenderSidebarSlide } from "../components/webComponents/SidebarSlide";
@@ -161,6 +162,14 @@ const initRouter = async () => {
       afterRenderSidebarSlide();
       await afterRenderVideoDetail(data.slug);
       afterRenderFooter("videos");
+    })
+    .on("/lines/:slug", async ({data}) => {
+      main.innerHTML = LineDetail();
+      afterRenderHeader();
+      afterRenderSidebar();
+      afterRenderSidebarSlide();
+      await afterRenderLineDetail(data.slug);
+      afterRenderFooter();
     })
     .resolve();
 };

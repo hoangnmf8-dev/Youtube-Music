@@ -60,7 +60,7 @@ const render = async () => {
   //Render ra giao diện
   albumsSection.innerHTML = `${SongSlide('Khám phá Albums mới', "/albums/details",exploreAlbumsData.items)}`;
   moodsSection.innerHTML = `${QuickPickSlide("Tâm trạng và thể loại", "/categories", "moodcards", exploreMoodsData.categories)}`
-  videosSection.innerHTML = `${SongSlide("Video nhạc mới", "/videos/details", exploreVideosData.items)}`
+  videosSection.innerHTML = `${SongSlide("Video nhạc mới", "/videos/details", exploreVideosData.items, "video")}`
 }
 
 const controlScroll = () => {
