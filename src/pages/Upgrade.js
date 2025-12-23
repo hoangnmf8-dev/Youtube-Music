@@ -1,15 +1,15 @@
 import handleBeforeRender from "../utils/handleBeforeRender";
 import toggleLoading from "../utils/toggleLodaing";
 
-function Library() {
+function Upgrade() {
   return `
-    <h1>Library</h1>
+    <h1>Upgrade</h1>
   `
 }
 
-export default Library;
+export default Upgrade;
 
-export const afterRenderLibrary = () => {
-  handleBeforeRender("library");
+export const afterRenderUpgrade = () => {
+  handleBeforeRender("upgrade");
   toggleLoading(false);
 }

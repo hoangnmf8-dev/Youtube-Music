@@ -44,7 +44,6 @@ export const afterRenderCategoriesDetail = async (slug) => {
     await render(slug);
     controlScroll();
   } catch (error) {
-    console.log("🚀 ~ afterRenderMoodAndGenres ~ error:", error)
     if (error.message === "Network Error") {
       showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
     }

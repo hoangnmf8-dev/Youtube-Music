@@ -11,8 +11,10 @@ import NewReleases, { afterRenderNewReleases } from "../pages/NewReleases";
 import Chart, { afterRenderChart } from "../pages/Chart";
 import MoodAndGenres, {afterRenderMoodAndGenres} from "../pages/MoodAndGenres";
 import CategoriesDetail, {afterRenderCategoriesDetail} from "../pages/CategoriesDetail";
-import Library from "../pages/Library";
+import Library, {afterRenderLibrary} from "../pages/Library";
+import Upgrade, {afterRenderUpgrade} from "../pages/Upgrade";
 import AlbumDetail, { afterRenderAlbumDetail } from "../pages/AlbumDetail";
+import VideoDetail, {afterRenderVideoDetail} from "../pages/VideoDetail";
 import { afterRenderHeader } from "../components/webComponents/Header";
 import { afterRenderSidebar } from "../components/webComponents/Sidebar";
 import { afterRenderSidebarSlide } from "../components/webComponents/SidebarSlide";
@@ -27,20 +29,20 @@ export const router = new Navigo("/", {
 const initRouter = async () => {
   const main = document.querySelector("#main");
   router
-    .on("/", () => {
+    .on("/", async () => {
       main.innerHTML = Home();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderHome();
+      await afterRenderHome();
       afterRenderFooter();
     })
-    .on("/moods/:slug", ({data}) => {
+    .on("/moods/:slug", async ({data}) => {
       main.innerHTML = MoodsDetail();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderMoodsDetail(data.slug);
+      await afterRenderMoodsDetail(data.slug);
       afterRenderFooter();
     })
     .on("/playlists/details/:slug", ({data}) => {
@@ -51,66 +53,74 @@ const initRouter = async () => {
       afterRenderPlaylistDetail(data.slug);
       afterRenderFooter();
     })
-    .on("/songs/details/:slug", ({data}) => {
+    .on("/songs/details/:slug", async ({data}) => {
       main.innerHTML = SongDetail(data.slug);
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderSongDetail(data.slug);
-      afterRenderFooter();
+      await afterRenderSongDetail(data.slug);
+      afterRenderFooter("songs");
     })
-    .on("/explore", () => {
+    .on("/explore", async () => {
       main.innerHTML = Explore();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderExplore();
+      await afterRenderExplore();
       afterRenderFooter();
     })
-    .on("/new-releases", () => {
+    .on("/new-releases", async () => {
       main.innerHTML = NewReleases();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderNewReleases();
+      await afterRenderNewReleases();
       afterRenderFooter();
     })
-    .on("/charts", () => {
+    .on("/charts", async () => {
       main.innerHTML = Chart();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderChart();
+      await afterRenderChart();
       afterRenderFooter();
     })
-    .on("/moods-and-genres", () => {
+    .on("/moods-and-genres", async () => {
       main.innerHTML = MoodAndGenres();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderMoodAndGenres();
+      await afterRenderMoodAndGenres();
       afterRenderFooter();
     })
-    .on("/categories/:slug", ({data}) => {
+    .on("/categories/:slug", async ({data}) => {
       main.innerHTML = CategoriesDetail();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderCategoriesDetail(data.slug);
+      await afterRenderCategoriesDetail(data.slug);
       afterRenderFooter();
     })
-    .on("/library", () => {
+    .on("/library", async () => {
       main.innerHTML = Library();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
+      afterRenderLibrary();
       afterRenderFooter();
     })
     .on("/upgrade", () => {
       if (!localStorage.getItem("access_token")) {
         router.navigate("/login");
         showToast(false, "Vui lòng đăng nhập trước!");
-      }
+        return;
+      } 
+      main.innerHTML = Upgrade();
+      afterRenderHeader();
+      afterRenderSidebar();
+      afterRenderSidebarSlide();
+      afterRenderUpgrade();
+      afterRenderFooter();
     })
     .on("/login", async () => {
       main.innerHTML = Login();
@@ -120,7 +130,7 @@ const initRouter = async () => {
       afterRenderLogin();
       afterRenderFooter();
     })
-    .on("/auth/profile", () => {
+    .on("/auth/profile", async () => {
       main.innerHTML = AuthProfile();
       afterRenderHeader();
       afterRenderSidebar();
@@ -136,13 +146,21 @@ const initRouter = async () => {
       afterRenderAuthPassword();
       afterRenderFooter();
     })
-    .on("/albums/details/:slug", ({data}) => {
+    .on("/albums/details/:slug", async ({data}) => {
       main.innerHTML = AlbumDetail();
       afterRenderHeader();
       afterRenderSidebar();
       afterRenderSidebarSlide();
-      afterRenderAlbumDetail(data.slug);
+      await afterRenderAlbumDetail(data.slug);
       afterRenderFooter();
+    })
+    .on("/videos/details/:slug", async ({data}) => {
+      main.innerHTML = VideoDetail();
+      afterRenderHeader();
+      afterRenderSidebar();
+      afterRenderSidebarSlide();
+      await afterRenderVideoDetail(data.slug);
+      afterRenderFooter("videos");
     })
     .resolve();
 };

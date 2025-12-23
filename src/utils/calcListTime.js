@@ -21,11 +21,11 @@ export const calcSongTime = (time) => {
   let minute, second, result;
   minute = Math.floor(time / 60);
   if(time > 60 && time % 60 !== 0) {
-    second = (time - minute * 60);
+    second = Math.floor((time - minute * 60));
   } else if(time % 60 === 0 && time !== 0) {
     second = 0;
   } else {
-    second = time;
+    second = Math.floor(time);
   }
   
   if(minute === 0) {
@@ -34,7 +34,7 @@ export const calcSongTime = (time) => {
   if(second === 0) {
     second = "00";
   } else if(second < 10) {
-    second = `0${second}`
+    second = `0${Math.floor(second)}`
   }
   result = `${minute}:${second}`;
   return result;

@@ -89,7 +89,12 @@ const renderAfterLogin = async () => {
   const homeTitle = $("#home-title");
   const homeRelease = $("#home-release");
 
-  const profileData = await getProfile();
+  let profileData;
+  if(localStorage.getItem("user")) {
+    profileData = JSON.parse(localStorage.getItem("user"));
+  } else {
+    const profileData = await getProfile();
+  }
   const personalizedData = await getPersonalized();
 
   homeTitle.innerHTML = `<span>👋 Chào mừng ${escapeHTML(

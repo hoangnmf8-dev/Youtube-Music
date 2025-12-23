@@ -16,7 +16,7 @@ function LineList(type, data) {
       </div>
       <div class="flex flex-col justify-between flex-1">
         <div class="font-semibold">${escapeHTML(item.title)}</div>
-        <div class="text-sm text-white/60">${escapeHTML(item.artists[0])}</div>
+        <div class="text-sm text-white/60">${escapeHTML(item.artists[0] || "Không rõ nghệ sĩ")}</div>
       </div>
       <div class="text-sm text-white/50">${escapeHTML(
         calcSongTime(item.duration)

@@ -16,6 +16,7 @@ body {
 
 button {
   user-select: none;
+  cursor: pointer;
 }
 
 .sidebar-item.active {
@@ -73,4 +74,8 @@ button {
     @apply opacity-100 pointer-events-auto translate-y-0;
   }
 
+
+  .song-detail-item.active {
+    @apply bg-[#223041];
+  }
 }

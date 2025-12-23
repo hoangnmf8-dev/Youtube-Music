@@ -1,17 +1,6 @@
-import "../../assets/style.css";
-import escapeHTML from "../../utils/escapeHTML";
-
-function Player() {
-  let data;
-  if(JSON.parse(sessionStorage.getItem("data_song")) && !JSON.parse(sessionStorage.getItem("current_song"))) {
-    data =  JSON.parse(sessionStorage.getItem("data_song"))[0];
-  } else if(!JSON.parse(sessionStorage.getItem("data_song")) && !JSON.parse(sessionStorage.getItem("current_song"))) {
-    data = null;
-  } else if(JSON.parse(sessionStorage.getItem("current_song"))) {
-    data = JSON.parse(sessionStorage.getItem("current_song"));
-  }
+export default function PlayerVideo() {
   return `
-    <div id="player" class="footer-song">
+    <div id="player-video" class="footer-song hidden">
       <div class="footer-song-controls">
         <div class="relative">
           <input
@@ -43,13 +32,13 @@ function Player() {
             >
               <span class="current">1:20</span>
               <span>/</span>
-              <span class="duration"></span>
+              <span class="duration">7:05</span>
             </div>
           </div>
 
           <div class="flex items-center justify-between gap-6">
             <img
-              src=""
+              src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482812Fuv/anh-mo-ta.png"
               alt=""
               class="thumb block w-10 aspect-square rounded-md"
             />
@@ -57,7 +46,7 @@ function Player() {
               <h3
                 class="song-infor-title title font-semibold text-[14px] sm:text-base truncate"
               >
-                
+                Nhạc Acoustic Album 16 - Bài 5
               </h3>
               <p class="song-infor-artist text-sm text-gray-400 truncate">
                 Không rõ nghệ sĩ
@@ -73,7 +62,7 @@ function Player() {
               </button>
             </div>
 
-            <div class="song-options relative hidden lg:block">
+            <div class="song-options relative">
               <button class="song-options hidden sm:block cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
                 <i
                   class="fa-solid fa-ellipsis-vertical text-lg md:text-xl"
@@ -120,19 +109,12 @@ function Player() {
             <button class="song-random btn-random cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
               <i class="fa-solid fa-shuffle text-lg md:text-xl"></i>
             </button>
-            </div>
-            <div class="flex items-center gap-2">
-              <button class="song-show-expand flex items-center cursor-pointer hover:bg-gray-500 transition-all duration-200 rounded-full">
-                <i class="fa-solid fa-expand"></i>
-              </button>
-              <button class="song-close flex item-center cursor-pointer hover:bg-gray-500 transition-all duration-200 rounded-full">
-                <i class="fa-solid fa-close text-lg md:text-xl"></i>
-              </button>
-            </div>
+            <button class="song-close btn-random cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
+              <i class="fa-solid fa-close text-lg md:text-xl"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  `;
+  `
 }
-
-export default Player;

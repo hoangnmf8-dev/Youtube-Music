@@ -5,7 +5,6 @@ import toggleLoading from "../utils/toggleLodaing";
 import handleBeforeRender from "../utils/handleBeforeRender";
 import showToast from "../utils/showToast";
 import controlSlide from "../utils/controlSlide";
-import ControlPlayer from "../utils/controlPlayer";
 import { getSongDetail } from "../service/playlistApi";
 import { SongInforDetail, LineSong } from "../components/listDetail/ListDetail";
 import ExpandPlayer from "../components/expandPlayer/ExpandPlayer";
@@ -35,12 +34,26 @@ const render = async (slug) => {
 
   //Lấy dữ liệu
   const songDetailData = await getSongDetail(slug);
-  songInfor.innerHTML = `${SongInforDetail(
-    songDetailData.album.tracks[0] || songDetailData.playlists[0].tracks[0]
-  )}`;
-  songDetail.innerHTML = `${LineSong(songDetailData.album.tracks || songDetailData.playlists[0].tracks)}`;
+  
+  let data;
+  if(!songDetailData.album?.tracks.length && !songDetailData.playlists?.length) {
+    data = songDetailData.related;
+  }
 
-  await handleEvent(songDetailData.playlists[0].tracks);
+  if(!data && !songDetailData.playlists?.length) {
+    data = songDetailData.album.tracks;
+  }
+
+  if(songDetailData.playlists?.length) {
+    data = songDetailData.playlists[0].tracks;
+  }
+
+  songInfor.innerHTML = `${SongInforDetail(
+    data[0] || data.tracks[0]
+  )}`;
+  songDetail.innerHTML = `${LineSong(data)}`;
+
+  await handleEvent(data);
 
   router.updatePageLinks();
 };
@@ -49,30 +62,7 @@ const handleEvent = async (dataSongs) => {
   //Lấy ra dữ liệu của dataSongs
   const lengthSongs = dataSongs.length;
   dataSongs.forEach((data, index) => {data._id = index});
-  localStorage.setItem("data_song", JSON.stringify(dataSongs));
-
-  //Hiện footerPlayer
-  const footerPlayer = $("#player");
-  const expandPlayer = $("#footer .expand-player");
-
-  //Hiển thị ra dữ liệu của expand player
-  expandPlayer.innerHTML = `${ExpandPlayer(dataSongs)}`;
-
-  const closeExpandPlayerIcon = $("#footer .expand-player .close-icon");
-  
-  footerPlayer.classList.remove("hidden");
-  footerPlayer.onclick = () => {
-    expandPlayer.classList.add("open");
-  }
-  closeExpandPlayerIcon.onclick = () => {
-    expandPlayer.classList.remove("open");
-  }
-
-  //TwoSyncPlayer
-  // const audio = $("audio");
-  // const controlPlayerFooter = new ControlPlayer({audio, dataSongs});
-  // controlPlayerFooter.attach("#player", "#main");
-  // controlPlayerFooter.attach(".expand-player", ".expand-player");
+  sessionStorage.setItem("data_song", JSON.stringify(dataSongs));
 };
 
 export const afterRenderSongDetail = async (slug) => {

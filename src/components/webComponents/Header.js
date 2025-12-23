@@ -145,8 +145,13 @@ const renderBeforeLogin = () => {
 };
 
 const renderAfterLogin = async () => {
-  const userProfile = await getProfile();
-  localStorage.setItem("user", JSON.stringify(userProfile));
+  let data;
+  if(localStorage.getItem("user")) {
+    data = JSON.parse(localStorage.getItem("user"));
+  } else {
+    const data = await getProfile();
+    localStorage.setItem("user", JSON.stringify(data));
+  }
   const headerUserBtn = $("#header .header-user");
 
   headerUserBtn.innerHTML = `
@@ -154,7 +159,7 @@ const renderAfterLogin = async () => {
         id="header-profile"
         class="w-10 h-10 flex items-center justify-center bg-white/20 rounded-full text-white font-semibold cursor-pointer hover:bg-white/30 transition"
       >
-        ${userProfile.name.slice(0, 1).toUpperCase()}
+        ${data.name.slice(0, 1).toUpperCase()}
       </button>
   
       <div
@@ -174,8 +179,11 @@ const renderAfterLogin = async () => {
 
 const showSidebarSlide = () => {
   const headerNavBtn = $("#header .header-btn-nav");
+  const sidebarSlideOVerlay = $(".sidebar-slide-overlay");
   headerNavBtn.addEventListener("click", (e) => {
     $("#sidebar-slide").classList.remove("-translate-x-full");
+    sidebarSlideOVerlay.classList.remove("opacity-0", "pointer-events-none");
+    sidebarSlideOVerlay.classList.add("backdrop-blur-sm");
   });
 };
 

@@ -1,3 +1,5 @@
+import { calcSongTime } from "../../utils/calcListTime";
+
 function ExpandPlayerInfor(data) {
   return `
     <div
@@ -5,12 +7,12 @@ function ExpandPlayerInfor(data) {
     >
       <img
         class="thumb w-80 h-80 lg:w-100 lg:h-100 rounded-xl object-cover shadow-[0_0_25px_#0d948880] rouded-lg"
-        src="https://picsum.photos/seed/album-nhc-in-t-album-13-12/400/400"
+        src="${null || JSON.parse(localStorage.getItem("current_song")).thumbnails[0]}"
       />
 
       <div class="space-y-1">
         <h2 class="title" class="text-xl font-semibold text-teal-400">
-          Nhạc Điện Tử Album 13 - Bài 2
+          ${null || JSON.parse(localStorage.getItem("current_song")).title}
         </h2>
         <p class="artist" class="text-gray-300 italic">
           Không rõ nghệ sĩ
@@ -69,16 +71,16 @@ function ExpandPlayerInfor(data) {
       <!-- Progress -->
       <div class="w-full flex flex-col gap-2 px-6 mt-4">
         <input
-          id="progress"
+          class="progress-expand-player progress w-full accent-red-500 cursor-pointer"
           type="range"
           min="0"
           max="100"
+          step="1"
           value="0"
-          class="w-full accent-red-500 cursor-pointer"
         />
         <div class="flex justify-between text-sm text-gray-400">
           <span class="current">0:02</span>
-          <span class="duration">4:39</span>
+          <span class="duration"></span>
         </div>
       </div>
     </div>

@@ -126,6 +126,10 @@ const upadteUser = async () => {
             name: usernameInput.value.trim(),
             email: emailInput.value.trim(),
           });
+          localStorage.setItem("user", JSON.stringify({
+            name: usernameInput.value.trim(),
+            email: emailInput.value.trim()
+          }))
           showToast(true, "Cập nhật thông tin thành công");
           router.navigate("/");
         } catch (error) {

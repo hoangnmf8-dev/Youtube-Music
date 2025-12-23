@@ -54,8 +54,8 @@ function SidebarSlide() {
       <nav class="sidebar-slide-nav flex flex-col items-center px-3 mt-4">
         
       </nav>
-    </aside>
-    <div class="pointer-events-none fixed inset-0 bg-black/80 transition transition-opacity opacity-0 duration-300"></div>
+      </aside>
+    <div class="sidebar-slide-overlay pointer-events-none fixed inset-0 bg-black/20 transition transition-opacity opacity-0 duration-300 z-40 backdrop-blur-sm"></div>
   `;
 }
 
@@ -103,7 +103,7 @@ const renderAfterLogin = () => {
       <i class="fa-regular fa-bookmark text-xl"></i>
       <span>Thư viện</span>
     </a>
-    <a href="#" data-navigo class="sidebar-slide-nav-item upgrade w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
+    <a href="/upgrade" data-navigo class="sidebar-slide-nav-item upgrade w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
       <i class="fa-solid fa-crown text-xl"></i>
       <span>Nâng cấp</span>
     </a>`;
@@ -111,9 +111,12 @@ const renderAfterLogin = () => {
 
 const closeSideBarSlide = () => {
   const sidebarSlideEl = $("#sidebar-slide");
+  const sidebarSlideOVerlay = $(".sidebar-slide-overlay");
   const closeSidebarSlideBtn = $("#sidebar-slide #close-sidebar");
   closeSidebarSlideBtn.addEventListener("click", (e) => {
     sidebarSlideEl.classList.add("-translate-x-full");
+    sidebarSlideOVerlay.classList.add("opacity-0", "pointer-events-none");
+    sidebarSlideOVerlay.classList.remove("backdrop-blur-sm");
   });
 };
 

@@ -8,7 +8,7 @@ export default function LineSong(data) {
       <div data-id="${escapeHTML(index)}" data-src="${item.audioUrl}" class="song-detail-item flex w-full items-center px-3 py-4 gap-4 hover:bg-[#25384a] cursor-pointer transition-all duration-100 text-white group rounded-lg">
         <div class="w-6 text-center">${index + 1}</div>
         <div class="relative w-12 aspect-square overflow-hidden rounded-sm">
-          <img class="block w-full aspect-square transition-all duration-150 group-hover:brightness-50 " src="${escapeHTML(
+          <img class="block w-full aspect-square transition-all duration-150 group-hover:brightness-50 object-cover" src="${escapeHTML(
             item.thumbnails[0]
           )}" alt="">
           <i class="fa-solid fa-play absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 opacity-0 pointer-events-none transition-all duration-150 group-hover:opacity-100 group-hover:pointer-events-auto"></i>
