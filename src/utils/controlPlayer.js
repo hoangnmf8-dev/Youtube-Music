@@ -21,10 +21,6 @@ export default class ControlPlayer {
     this._signal = this._controller.signal;
   }
 
-  destroy() {
-    this._controller.abort();
-  }
-
   setCurrentSong(song) {
     sessionStorage.setItem("current_song", JSON.stringify(song));
   }
@@ -104,7 +100,7 @@ export default class ControlPlayer {
     }
   }
 
-  async play(idSong, type = true) {
+  async play(idSong) {
     const srcSong = this.dataSongs?.[idSong]?.audioUrl;
     if (!srcSong) throw new Error("Tài nguyên không có sẵn");
 
@@ -112,7 +108,6 @@ export default class ControlPlayer {
     this.audio.currentTime = 0;
     this.audio.src = srcSong;
     this.audio.load();
-    if (!type) return;
     this.$("#player .btn-play").classList.add("hidden");
     this.$("#player .btn-pause").classList.remove("hidden");
     return this.audio.play();
@@ -132,12 +127,10 @@ export default class ControlPlayer {
 
   addSong(prefixItemSong) {
     this._reqId = this._reqId || 0;
-    document.addEventListener(
-      "click",
-      async (e) => {
+    document.querySelectorAll(`${prefixItemSong} .song-detail-item`).forEach(item => {
+      item.onclick = async (e) => {
         const player = this.$(".player-wrapper");
         const expandPlayer = this.$(".expand-player");
-        const item = e.target.closest(`${prefixItemSong} .song-detail-item`);
         if (!item) return;
 
         //Lấy ra id song và xử lý play, lỗi khi load chậm
@@ -159,9 +152,8 @@ export default class ControlPlayer {
         } finally {
           if (reqId === this._reqId) toggleLoading(false);
         }
-      },
-      { signal: this._signal }
-    );
+      }
+    })
   }
 
   updateProgressAnDuration(prefix, prefixItemSong) {

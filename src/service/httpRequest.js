@@ -46,16 +46,10 @@ httpRequest.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (+error.response?.status === 401) {
-      if (error.config?._retry) {
-        logout();
-        return;
-      }
-      error.config._retry = true;
       if (!refreshPromise) {
         refreshPromise = getNewToken();
       }
       const newToken = await refreshPromise;
-      refreshPromise = null;
       if (newToken) {
         localStorage.setItem("access_token", newToken.access_token);
         localStorage.setItem("refresh_token", newToken.refresh_token);

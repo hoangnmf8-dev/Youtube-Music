@@ -2,14 +2,6 @@ import "../../assets/style.css";
 import escapeHTML from "../../utils/escapeHTML";
 
 function Player() {
-  let data;
-  if(JSON.parse(sessionStorage.getItem("data_song")) && !JSON.parse(sessionStorage.getItem("current_song"))) {
-    data =  JSON.parse(sessionStorage.getItem("data_song"))[0];
-  } else if(!JSON.parse(sessionStorage.getItem("data_song")) && !JSON.parse(sessionStorage.getItem("current_song"))) {
-    data = null;
-  } else if(JSON.parse(sessionStorage.getItem("current_song"))) {
-    data = JSON.parse(sessionStorage.getItem("current_song"));
-  }
   return `
     <div id="player" class="footer-song">
       <div class="footer-song-controls">

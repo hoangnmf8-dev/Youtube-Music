@@ -51,3 +51,50 @@ export const formatDateDDMMYYYY = (isoString) => {
 
   return `${dd}/${mm}/${yyyy}`;
 }
+
+export const calcVideoTime = (time) => {
+  let hour, minute, second;
+  if(time % 3600 === 0) {
+    hour = time / 3600;
+    if(hour < 10) hour = `0${hour}`
+    return `${hour}:00:00`;
+  }
+  if(time > 3600 && time % 3600 !== 0) {
+    hour = Math.floor(time / 3600);
+    if(hour < 10) hour = `0${hour}`;
+    if((time - hour * 3600) % 60 === 0) {
+      minute = (time - hour * 3600) / 60;
+      if(minute < 10) minute = `0${minute}`;
+      return `${hour}:${minute}:00`;
+    } else {
+      minute = Math.floor((time - hour * 3600) / 60);
+      second = time - hour * 3600 - minute * 60;
+      if(minute < 10) minute = `0${minute}`;
+      if(second < 10) {
+        second = `0${Math.floor(second)}`;
+      } else {
+        second = Math.floor(second);
+      }
+
+      return `${hour}:${minute}:${second}`;
+    }
+  }
+  if(time < 3600) {
+    hour = "00";
+    if(time % 60 === 0) {
+      minute = time / 60;
+      if(minute < 10) minute = `0${minute}`;
+      return `${hour}:${minute}:00`;
+    } else {
+      minute = Math.floor(time / 60);
+      second = time - minute * 60;
+      if(minute < 10) minute = `0${minute}`;
+      if(second < 10) {
+        second = `0${Math.floor(second)}`;
+      } else {
+        second = Math.floor(second);
+      }
+      return `${hour}:${minute}:${second}`;
+    }
+  }
+}
