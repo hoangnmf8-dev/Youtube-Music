@@ -2,7 +2,7 @@ import { calcSongTime } from "./calcListTime";
 import escapeHTML from "./escapeHTML";
 import showToast from "./showToast";
 import toggleLoading from "./toggleLodaing";
-
+import eventPlay from "../service/eventPlayApi";
 export default class ControlPlayer {
   constructor({ audio, dataSongs }) {
     this.$ = document.querySelector.bind(document);
@@ -127,33 +127,36 @@ export default class ControlPlayer {
 
   addSong(prefixItemSong) {
     this._reqId = this._reqId || 0;
-    document.querySelectorAll(`${prefixItemSong} .song-detail-item`).forEach(item => {
-      item.onclick = async (e) => {
-        const player = this.$(".player-wrapper");
-        const expandPlayer = this.$(".expand-player");
-        if (!item) return;
+    document
+      .querySelectorAll(`${prefixItemSong} .song-detail-item`)
+      .forEach((item) => {
+        item.onclick = async (e) => {
+          const player = this.$(".player-wrapper");
+          const expandPlayer = this.$(".expand-player");
+          if (!item) return;
 
-        //Lấy ra id song và xử lý play, lỗi khi load chậm
-        const idSong = +item.dataset.id;
-        this.index = idSong;
-        const reqId = ++this._reqId;
+          //Lấy ra id song và xử lý play, lỗi khi load chậm
+          const idSong = +item.dataset.id;
+          this.index = idSong;
+          const reqId = ++this._reqId;
 
-        try {
-          toggleLoading(true);
-          await Promise.race([this.play(idSong), this.timeOutPlay(10000)]);
-          this.updateUI(this.dataSongs[this.index]);
-          this.setCurrentSong(this.dataSongs[this.index]);
-          player.classList.remove("hidden");
-        } catch (error) {
-          if (reqId !== this._reqId) return;
-          if (error?.name === "AbortError") return; //Chỉ có tác dụng bỏ qua lỗi abort của trình duyệt để hiện error message không có sẵn tài nguyên
-          this.cancelAudio();
-          showToast(false, "Tài nguyên không có sẵn");
-        } finally {
-          if (reqId === this._reqId) toggleLoading(false);
-        }
-      }
-    })
+          try {
+            toggleLoading(true);
+            await Promise.race([this.play(idSong), this.timeOutPlay(10000)]);
+            this.updateUI(this.dataSongs[this.index]);
+            this.setCurrentSong(this.dataSongs[this.index]);
+            player.classList.remove("hidden");
+          } catch (error) {
+            console.log(error);
+            if (reqId !== this._reqId) return;
+            if (error?.name === "AbortError") return; //Chỉ có tác dụng bỏ qua lỗi abort của trình duyệt để hiện error message không có sẵn tài nguyên
+            this.cancelAudio();
+            showToast(false, "Tài nguyên không có sẵn");
+          } finally {
+            if (reqId === this._reqId) toggleLoading(false);
+          }
+        };
+      });
   }
 
   updateProgressAnDuration(prefix, prefixItemSong) {
@@ -172,6 +175,15 @@ export default class ControlPlayer {
       if (!Number.isFinite(duration) || duration <= 0) return;
       progress.value = (e.target.currentTime / duration) * 100;
       currentTimeSpan.innerText = calcSongTime(this.audio.currentTime);
+
+      const percentListen = Math.floor(
+        (this.audio.currentTime / this.audio.duration) * 100
+      );
+      if (percentListen >= 10 && percentListen <= 11) {
+        if (localStorage.getItem("access_token")) {
+          eventPlay({ songId: this.dataSongs[this.index].id });
+        }
+      }
     });
 
     progress.addEventListener("change", (e) => {

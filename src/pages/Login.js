@@ -4,11 +4,12 @@ import { register, login } from "../service/authApi";
 import { router } from "../route/router";
 import toggleLoading from "../utils/toggleLodaing";
 import showToast from "../utils/showToast";
+import handleBeforeRender from "../utils/handleBeforeRender";
 
 function Login() {
   return `
     <div class="login-container fixed inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('../public/bg_login.jpg');">
-      <form id="login-form" class="form display fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 min-w-[400px] rounded-lg p-10 bg-white/10 backdrop-blur-xl border border-white/20">
+      <form id="login-form" autocomplete="off" class="form display fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 min-w-[400px] rounded-lg p-10 bg-white/10 backdrop-blur-xl border border-white/20">
         <h1 class="text-white font-semibold text-center text-xl mb-6">ĐĂNG NHẬP</h1>
         <div class="form-group">
           <label for="login-email" class="block text-sm text-white mb-1">Email</label>
@@ -19,7 +20,7 @@ function Login() {
         <div class="form-group mt-6">
           <label for="login-password" class="block text-sm text-white mb-1">Mật khẩu</label>
           <input class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" id="login-password" type="password"
-          name="password" 
+          name="userpassword" 
           placeholder="Mật khẩu"
           autocomplete="new-password"/>
           <p class="form-group-error hidden text-red-400"></p>
@@ -333,7 +334,7 @@ const validateForm = () => {
 };
 
 export const afterRenderLogin = () => {
-  toggleLoading(true);
+  handleBeforeRender();
   $(".sidebar-item.active")?.classList.remove("active");
   $(".sidebar-item.sidebar-slide-nav-item.active")?.classList.remove("active");
   setTimeout(() => {

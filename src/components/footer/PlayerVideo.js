@@ -63,11 +63,6 @@ export default function PlayerVideo() {
             </div>
 
             <div class="video-options relative hidden lg:block">
-              <button class="video-options hidden sm:block cursor-pointer hover:bg-gray-500 transition-all duration-200 p-2 rounded-full">
-                <i
-                  class="fa-solid fa-ellipsis-vertical text-lg md:text-xl"
-                ></i>
-              </button>
               <div
                 class="video-options-menu hidden absolute -top-[10px] -translate-y-full -translate-x-2/3 min-w-[200px] bg-[#2b2b2b] rounded-md p-2"
               >
@@ -111,10 +106,10 @@ export default function PlayerVideo() {
             </button>
             </div>
             <div class="flex items-center gap-2">
-              <button class="video-show-expand flex items-center cursor-pointer hover:bg-gray-500 transition-all duration-200 rounded-full">
-                <i class="fa-solid fa-expand"></i>
+              <button class="video-show-expand flex items-center cursor-pointer hover:bg-gray-500 p-2 transition-all duration-200 rounded-full">
+                <i class="fa-solid fa-expand text-lg md:text-xl"></i>
               </button>
-              <button class="video-close flex item-center cursor-pointer hover:bg-gray-500 transition-all duration-200 rounded-full">
+              <button class="video-close flex item-center cursor-pointer hover:bg-gray-500 p-2 transition-all duration-200 rounded-full">
                 <i class="fa-solid fa-close text-lg md:text-xl"></i>
               </button>
             </div>

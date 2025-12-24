@@ -1,4 +1,5 @@
 import "../../assets/style.css";
+import "../../assets/quickpick_slide.css";
 import { router } from "../../route/router";
 import { getProfile } from "../../service/authApi";
 import { logout } from "../../service/httpRequest";
@@ -214,6 +215,7 @@ const handleSearch = () => {
       let valueInput = e.target.value.trim();
       if (!valueInput) {
         clearInput.classList.add("hidden");
+        dropMenu.classList.add("hidden");
         return;
       }
       clearInput.classList.remove("hidden");
@@ -241,7 +243,7 @@ const handleSearch = () => {
 
       dropMenu.innerHTML = `
         <p class="text-sm text-gray-300 mb-2">Gợi ý</p>
-        <div class="max-h-80 overflow-y-auto">
+        <div class="max-h-[200px] scrollbar-search overflow-y-auto">
           ${valueSearch.suggestions
             .map(
               (item) => `
@@ -254,7 +256,7 @@ const handleSearch = () => {
         </div>
         <hr class="h-0.5 text-gray-600 w-full">
         <p class="text-sm text-gray-300 mt-3 mb-2">Kết quả</p>
-        <div class="max-h-80 overflow-y-auto">
+        <div class="max-h-80 scrollbar-search overflow-y-auto">
             ${valueSearch.completed
               .map(
                 (item) => `
@@ -283,12 +285,13 @@ const handleSearch = () => {
 
       document.querySelectorAll(".suggest-result").forEach((item) => {
         item.onclick = (e) => {
-          const inputSearchEl = $("#header input");
+          const inputSearchValue = item.innerText;
+          $("#header input").value = inputSearchValue;
           const valueSuggest = valueSearch.suggestions.filter(
-            (item) => item === inputSearchEl
+            (item) => item === inputSearchValue
           );
           const valueCompleted = valueSearch.completed.filter(
-            (item) => item.title === inputSearchEl
+            (item) => item.title === inputSearchValue
           );
           dropMenu.innerHTML = `
             <p class="text-sm text-gray-300 mb-2">Gợi ý</p>

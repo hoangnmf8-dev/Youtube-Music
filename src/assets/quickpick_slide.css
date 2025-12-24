@@ -12,17 +12,34 @@
   }
 
   .scrollbar-pill::-webkit-scrollbar {
-    height: 5px; /* độ dày */
+    height: 5px; 
   }
 
   .scrollbar-pill::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.55); /* track đen mờ */
+    background: rgba(0, 0, 0, 0.55); 
     border-radius: 999px;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
   }
 
   .scrollbar-pill::-webkit-scrollbar-thumb {
-    background: rgba(210, 210, 210, 0.75); /* thumb xám sáng */
+    background: rgba(210, 210, 210, 0.75); 
+    border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+  }
+
+  .scrollbar-search::-webkit-scrollbar {
+    width: 5px; 
+  }
+
+  .scrollbar-search::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.55); 
+    border-radius: 999px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  .scrollbar-search::-webkit-scrollbar-thumb {
+    background: rgba(210, 210, 210, 0.75); 
     border-radius: 999px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
     cursor: pointer;

@@ -19,7 +19,7 @@ const getNewToken = async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        refresh_token: localStorage.getItem("refresh_token"),
+        refreshToken: localStorage.getItem("refresh_token"),
       }),
     });
     if (!response.ok) throw new Error("Unauthorize");

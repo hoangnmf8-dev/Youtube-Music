@@ -49,7 +49,7 @@ export const afterRenderFooter = (slug) => {
   closePlayerBtn.onclick = (e) => {
     e.stopPropagation();
     let id = confirm("Bạn muốn đóng trình phát nhạc?");
-    if(!id) return;
+    if (!id) return;
     sessionStorage.removeItem("data_song");
     sessionStorage.removeItem("current_song");
     footerPlayerWrapper.classList.add("hidden");
@@ -59,9 +59,11 @@ export const afterRenderFooter = (slug) => {
       ?.classList.remove("active");
   };
   //Lấy dữ liệu ra khi chuyển trang
+  if(sessionStorage.getItem("data_song") && slug === "songs") {
+    expandPlayer.innerHTML = `${ExpandPlayer(dataSongs)}`;
+  }
   if (sessionStorage.getItem("data_song")) {
     const controlPlayerFooter = new ControlPlayer({ audio, dataSongs });
-    expandPlayer.innerHTML = `${ExpandPlayer(dataSongs)}`;
     controlPlayerFooter.start("#player", "#main");
     controlPlayerFooter.start(".expand-player-infor", ".expand-player");
     if (JSON.parse(sessionStorage.getItem("current_song"))) {
@@ -121,7 +123,7 @@ export const afterRenderFooter = (slug) => {
       };
     }
 
-    if(!playerVideo || slug === "videos") {
+    if (!playerVideo || slug === "videos") {
       playerVideo = new controlVideo("iframe-expand-video", dataVideo);
       playerVideo.start(".player-video-wrapper", ".video-detail");
       playerVideo.start(".expand-video-infor", ".expand-video-detail");
@@ -130,20 +132,20 @@ export const afterRenderFooter = (slug) => {
     //Đóng toàn bộ expand video
     closePlayerVideoBtn.onclick = (e) => {
       let id = confirm("Bạn muốn tắt trình phát video?");
-      if(!id) return;
+      if (!id) return;
       playerVideo.closePlayer();
     };
   }
 
   //Đóng toàn bộ player khi vào trong trang video
   if (slug === "videos") {
-    if(sessionStorage.getItem('data_song')) {
+    if (sessionStorage.getItem("data_song")) {
       showToast(true, "Đã đóng trình phát nhạc");
     }
     sessionStorage.removeItem("data_song");
     sessionStorage.removeItem("current_song");
     footerPlayerWrapper.classList.add("hidden");
-    expandPlayer.classList.add("hidden");
+    expandPlayer.classList.remove("open");
     document.querySelector("audio").src = "";
     document
       .querySelector("#main .song-detail-item.active")
@@ -152,7 +154,7 @@ export const afterRenderFooter = (slug) => {
 
   //Đóng toàn bộ video khi vào trong trang song
   if (slug === "songs") {
-    if(sessionStorage.getItem("data_video")) {
+    if (sessionStorage.getItem("data_video")) {
       showToast(true, "Đã đóng trình phát video");
     }
     playerVideo?.closePlayer();
