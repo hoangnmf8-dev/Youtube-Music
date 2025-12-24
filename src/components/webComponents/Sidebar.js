@@ -18,7 +18,7 @@ const renderBeforeLogin = () => {
   const sidebarWrapper = $("#sidebar .sidebar-wrapper");
   sidebarWrapper.innerHTML = `
     <a href="/" class="sidebar-item home group active flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
-      <i class="fa-regular fa-house text-2xl"></i>
+      <i class="fa-solid fa-house text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Trang chủ</p>
     </a>
     <a href="/explore" class="sidebar-item explore group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
@@ -46,7 +46,7 @@ const renderAfterLogin = () => {
   const sidebarWrapper = $("#sidebar .sidebar-wrapper");
   sidebarWrapper.innerHTML = `
     <a href="/" class="sidebar-item home group active flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">
-      <i class="fa-regular fa-house text-2xl"></i>
+      <i class="fa-solid fa-house text-2xl"></i>
       <p class="text-[11px] text-gray-300 group-hover:text-white">Trang chủ</p>
     </a>
     <a href="/explore" class="sidebar-item explore group flex flex-col items-center justify-center gap-1 p-3 hover:bg-white/10 rounded-xl">

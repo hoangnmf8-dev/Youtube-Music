@@ -67,7 +67,7 @@ const renderBeforeLogin = () => {
   const sidebarSlideNav = $(".sidebar-slide-nav");
   sidebarSlideNav.innerHTML = `
     <a href="/" data-navigo class="sidebar-slide-nav-item home w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
-      <i class="fa-regular fa-house text-xl"></i>
+      <i class="fa-solid fa-house text-xl"></i>
       <span>Trang chủ</span>
     </a>
     <a href="/explore" data-navigo class="sidebar-slide-nav-item explore w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
@@ -92,7 +92,7 @@ const renderAfterLogin = () => {
   const sidebarSlideNav = $(".sidebar-slide-nav");
   sidebarSlideNav.innerHTML = `
     <a href="/" data-navigo class="sidebar-slide-nav-item home w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
-      <i class="fa-regular fa-house text-xl"></i>
+      <i class="fa-solid fa-house text-xl"></i>
       <span>Trang chủ</span>
     </a>
     <a href="/explore" data-navigo class="sidebar-slide-nav-item explore w-full flex items-center gap-5 rounded-lg p-3 text-md hover:bg-[#333333] transition-all duration-1.5">
