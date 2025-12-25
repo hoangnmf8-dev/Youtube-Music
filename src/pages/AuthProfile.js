@@ -6,7 +6,7 @@ import { router } from "../route/router";
 
 function AuthProfile() {
   return `
-   <div class="login-container fixed inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/public/bg_login.jpg');">
+   <div class="login-container fixed inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/bg_login.jpg');">
     <form id="update-profile-form" class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 min-w-[400px] rounded-lg p-10 bg-white/10 backdrop-blur-xl border border-white/20">
       <h2 class="text-white font-semibold text-center text-xl mb-6">CẬP NHẬT THÔNG TIN</h2>
       <div class="form-group">

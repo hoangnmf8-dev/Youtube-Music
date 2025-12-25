@@ -9,7 +9,7 @@ import handleShowPassword from "../utils/handleShowPassword";
 
 function Login() {
   return `
-    <div class="login-container fixed inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/public/bg_login.jpg');">
+    <div class="login-container fixed inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/bg_login.jpg');">
       <form id="login-form" autocomplete="off" class="form display fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 min-w-[400px] rounded-lg p-10 bg-white/10 backdrop-blur-xl border border-white/20">
         <h1 class="text-white font-semibold text-center text-xl mb-6">ĐĂNG NHẬP</h1>
         <div class="form-group">
