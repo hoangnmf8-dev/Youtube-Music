@@ -92,7 +92,6 @@ const renderAfterLogin = async () => {
     profileData = await getProfile();
   }
   const personalizedData = await getPersonalized();
-  console.log("🚀 ~ renderAfterLogin ~ personalizedData:", personalizedData)
 
   homeTitle.innerHTML = `<span>👋 Chào mừng ${escapeHTML(
     profileData.name

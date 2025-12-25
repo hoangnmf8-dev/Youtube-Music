@@ -7,7 +7,7 @@ function LineList(type, data) {
       .tracks.map(
         (item, index) => `
       <a href="/songs/details/${item.id}" class="flex w-full items-center px-3 py-4 gap-4 hover:bg-[#25384a] cursor-pointer transition-all duration-150 text-white group rounded-lg">
-      <div class="w-6 text-center">${type === "playlist" ? index + 1 : ``}</div>
+      <div class="${type === "playlist" ? "w-6" : ``} text-center">${type === "playlist" ? index + 1 : ``}</div>
       <div class="relative w-12 aspect-square overflow-hidden rounded-sm">
         <img class="block w-full aspect-square transition-all duration-150 group-hover:brightness-50 " src="${escapeHTML(
           item.thumbnails[0]

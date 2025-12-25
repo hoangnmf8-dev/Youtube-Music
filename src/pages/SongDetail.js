@@ -13,7 +13,7 @@ import ExpandPlayer from "../components/expandPlayer/ExpandPlayer";
 export default function SongDetail() {
   return `
     <div class="p-2">
-      <div class="wrapper px-8 lg:px-2">
+      <div class="wrapper lg:px-2">
         <div class="row flex flex-col flex-wrap justify-between lg:flex-row items-center lg:items-start">
           <div class="song-infor static lg:sticky lg:top-24 text-white flex flex-col md:basis-1/4 lg:basis-1/2 gap-5 items-center w-[400px] shrink-0 grow-0">
           </div>

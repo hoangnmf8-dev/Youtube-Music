@@ -16,7 +16,6 @@ export default class ControlPlayer {
     this.isRandom = false;
     this.isRepeat = false;
     this.endDebounce = false;
-    this.debounceRandomAndRepeat = false;
   }
 
   setCurrentSong(song) {
@@ -352,58 +351,72 @@ export default class ControlPlayer {
     });
   }
 
-  randomAndRepeatSong() {
-    if (this.debounceRandomAndRepeat) return;
-    this.debounceRandomAndRepeat = true;
-    document.onclick = (e) => {
-      if (
-        e.target.closest(`#player .btn-random`) ||
-        e.target.closest(`.expand-player .btn-random`)
-      ) {
-        this.isRandom = !this.isRandom;
-        if (
-          !this.$("#player .btn-random i").classList.contains("text-blue-400")
-        ) {
-          this.$("#player .btn-random i").classList.add("text-blue-400");
-        } else {
-          this.$("#player .btn-random i").classList.remove("text-blue-400");
-        }
-        if (
-          !this.$(".expand-player .btn-random i").classList.contains(
-            "text-blue-400"
-          )
-        ) {
-          this.$(".expand-player .btn-random i").classList.add("text-blue-400");
-        } else {
-          this.$(".expand-player .btn-random i").classList.remove(
-            "text-blue-400"
-          );
-        }
+  handleRandom() {
+    if (this.debounceRandom) return;
+    this.debounceRandom = true;
+    const btnRandomPlayer = this.$(`#player .btn-random`);
+    const btnRandomExpand = this.$(`.expand-player .btn-random`);
+    const btnRepeatPlayer = this.$(`#player .btn-repeat`);
+    const btnRepeatExpand = this.$(`.expand-player .btn-repeat`);
+    btnRandomPlayer.onclick = (e) => {
+      this.isRandom = !this.isRandom;
+      if (this.isRandom) {
+        btnRandomPlayer.classList.add("text-blue-500");
+        btnRandomExpand.classList.add("text-blue-500");
+        btnRepeatPlayer.classList.remove("text-blue-500");
+        btnRepeatExpand.classList.remove("text-blue-500");
+        this.isRepeat = false;
+      } else {
+        btnRandomPlayer.classList.remove("text-blue-500");
+        btnRandomExpand.classList.remove("text-blue-500");
       }
+    };
+    btnRandomExpand.onclick = (e) => {
+      this.isRandom = !this.isRandom;
+      if (this.isRandom) {
+        btnRandomExpand.classList.add("text-blue-500");
+        btnRandomPlayer.classList.add("text-blue-500");
+        btnRepeatPlayer.classList.remove("text-blue-500");
+        btnRepeatExpand.classList.remove("text-blue-500");
+        this.isRepeat = false;
+      } else {
+        btnRandomExpand.classList.remove("text-blue-500");
+        btnRandomPlayer.classList.remove("text-blue-500");
+      }
+    };
+  }
 
-      if (
-        e.target.closest(`#player .btn-repeat`) ||
-        e.target.closest(`.expand-player .btn-repeat`)
-      ) {
-        this.isRepeat = !this.isRepeat;
-        if (
-          !this.$("#player .btn-repeat i").classList.contains("text-blue-400")
-        ) {
-          this.$("#player .btn-repeat i").classList.add("text-blue-400");
-        } else {
-          this.$("#player .btn-repeat i").classList.remove("text-blue-400");
-        }
-        if (
-          !this.$(".expand-player .btn-repeat i").classList.contains(
-            "text-blue-400"
-          )
-        ) {
-          this.$(".expand-player .btn-repeat i").classList.add("text-blue-400");
-        } else {
-          this.$(".expand-player .btn-repeat i").classList.remove(
-            "text-blue-400"
-          );
-        }
+  handleRepeat() {
+    if (this.debounceRepeat) return;
+    this.debounceRepeat = true;
+    const btnRepeatPlayer = this.$(`#player .btn-repeat`);
+    const btnRepeatExpand = this.$(`.expand-player .btn-repeat`);
+    const btnRandomPlayer = this.$(`#player .btn-random`);
+    const btnRandomExpand = this.$(`.expand-player .btn-random`);
+    btnRepeatPlayer.onclick = (e) => {
+      this.isRepeat = !this.isRepeat;
+      if (this.isRepeat) {
+        btnRepeatPlayer.classList.add("text-blue-500");
+        btnRepeatExpand.classList.add("text-blue-500");
+        btnRandomPlayer.classList.remove("text-blue-500");
+        btnRandomExpand.classList.remove("text-blue-500");
+        this.isRandom = false;
+      } else {
+        btnRepeatPlayer.classList.remove("text-blue-500");
+        btnRepeatExpand.classList.remove("text-blue-500");
+      }
+    };
+    btnRepeatExpand.onclick = (e) => {
+      this.isRepeat = !this.isRepeat;
+      if (this.isRepeat) {
+        btnRepeatExpand.classList.add("text-blue-500");
+        btnRepeatPlayer.classList.add("text-blue-500");
+        btnRandomPlayer.classList.remove("text-blue-500");
+        btnRandomExpand.classList.remove("text-blue-500");
+        this.isRandom = false;
+      } else {
+        btnRepeatExpand.classList.remove("text-blue-500");
+        btnRepeatPlayer.classList.remove("text-blue-500");
       }
     };
   }
@@ -415,6 +428,7 @@ export default class ControlPlayer {
     this.playAndPauseSong();
     this.controlVolume(prefix);
     this.handleEndSong(prefix);
-    this.randomAndRepeatSong();
+    this.handleRandom();
+    this.handleRepeat();
   }
 }
