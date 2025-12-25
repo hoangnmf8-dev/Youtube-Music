@@ -68,7 +68,7 @@ const initRouter = async () => {
       await afterRenderSongDetail(data.slug);
       afterRenderFooter("songs");
     })
-    .on("/explore", async () => {
+    .on("explore", async () => {
       main.innerHTML = Explore();
       afterRenderHeader();
       afterRenderSidebar();
