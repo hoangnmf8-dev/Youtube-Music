@@ -184,6 +184,10 @@ export default class ControlPlayer {
       if (this.audio.duration) {
         this.audio.currentTime = (progress.value * this.audio.duration) / 100;
       }
+      const firstLine = this.$(".first-line");
+      const lastLine = this.$(".last-line");
+      firstLine.innerHTML = "";
+      lastLine.innerHTML = "";
     });
   }
 
