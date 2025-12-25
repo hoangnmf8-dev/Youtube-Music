@@ -85,7 +85,6 @@ export const afterRenderMoodsDetail = async (slug) => {
     controlScroll();
     router.updatePageLinks();
   } catch (error) {
-    console.log(error);
     if (error.message === "Network Error") {
       showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
     }

@@ -53,9 +53,7 @@ const render = async () => {
   const videosSection = $("#explore-videos");
 
   //Lấy dữ liệu
-  const exploreAlbumsData = await getExploreAlbums();
-  const exploreMoodsData = await getExploreMoods();
-  const exploreVideosData = await getExploreVideos();
+  const [exploreAlbumsData, exploreMoodsData, exploreVideosData] = await Promise.all([getExploreAlbums(), getExploreMoods(), getExploreVideos()])
 
   //Render ra giao diện
   albumsSection.innerHTML = `${SongSlide('Khám phá Albums mới', "/albums/details",exploreAlbumsData.items)}`;

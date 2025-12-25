@@ -37,11 +37,7 @@ export const render = async (slug) => {
   const lineAlbumsSection = $("#line-albums");
 
   //Lấy dữ liệu
-  const lineSongsData = await getLineSongs(slug);
-  const linePlaylistsData = await getLinePlaylists(slug);
-  const lineAlbumsData = await getLineAlbums(slug);
-  const lineVideosData = await getLineVideos(slug);
-  console.log("🚀 ~ render ~ lineVideosData:", lineVideosData)
+  const [lineSongsData, linePlaylistsData, lineAlbumsData, lineVideosData] = await Promise.all([getLineSongs(slug), getLinePlaylists(slug), getLineAlbums(slug), getLineVideos(slug)])
 
   //Render
   lineSongsSection.innerHTML = `${QuickPickSlide("Bài hát", "/songs/details", "quickpick", lineSongsData.items)}`;
@@ -66,7 +62,6 @@ export const afterRenderLineDetail = async (slug) => {
     await render(slug);
     controlScroll();
   } catch (error) {
-    console.log("🚀 ~ afterRenderLineDetail ~ error:", error)
     if (error.message === "Network Error") {
       showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
     }

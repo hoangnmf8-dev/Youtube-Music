@@ -43,6 +43,9 @@ export const afterRenderPlaylistDetail = async (slug) => {
     handleBeforeRender();
     await render(slug);
   } catch (error) {
+    if(+error.status === 404) {
+      showToast(false, "Không tìm thấy tài nguyên");
+    }
     if (error.message === "Network Error") {
       showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
     }

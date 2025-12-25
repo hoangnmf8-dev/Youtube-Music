@@ -129,8 +129,8 @@ function Header() {
           </div>
         </div>
       </div>
-
-      <div class="toast"></div>
+      
+      <div class="toast-container"></div>
       <div class="loading-modal hidden">
         <div class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
       </div>
@@ -154,11 +154,10 @@ const renderAfterLogin = async () => {
   if (localStorage.getItem("user")) {
     data = JSON.parse(localStorage.getItem("user"));
   } else {
-    const data = await getProfile();
+    data = await getProfile();
     localStorage.setItem("user", JSON.stringify(data));
   }
   const headerUserBtn = $("#header .header-user");
-
   headerUserBtn.innerHTML = `
       <button
         id="header-profile"

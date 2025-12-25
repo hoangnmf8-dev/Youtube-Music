@@ -32,7 +32,6 @@ export default class controlVideo {
       events: {
         onReady: () => {
           this.isReady = true;
-          console.log("YouTube Player is ready");
         },
         onStateChange: (event) => this.onPlayerStateChange(event),
         onError: (e) => console.error("YouTube API Error:", e.data),
@@ -130,9 +129,9 @@ export default class controlVideo {
 
   scrollToItem(el, { behavior = "smooth", block = "center" } = {}) {
     if (!el) return;
-    el.scrollIntoView({ behavior, block, inline: "nearest" });
-    // requestAnimationFrame(() => {
-    // });
+    requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior, block, inline: "nearest" });
+    });
   }
 
   updateUI(videoId) {

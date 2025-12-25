@@ -27,8 +27,7 @@ const render = async () => {
   const releasesVideosSection = $("#releases-videos");
 
   //Lấy dữ liệu
-  const releasesAlbumsData = await getNewRelease();
-  const releasesVideosData = await getNewReleaseVideos();
+  const [releasesAlbumsData, releasesVideosData] = await Promise.all([getNewRelease(), getNewReleaseVideos()]);
 
   //Render
   releasesAlbumsSection.innerHTML = `${SongSlide(
@@ -36,7 +35,7 @@ const render = async () => {
     "/albums/details",
     releasesAlbumsData.items
   )}`;
-  releasesVideosSection.innerHTML = `${SongSlide("Video nhạc mới", "/videos/details", releasesVideosData.items)}`;
+  releasesVideosSection.innerHTML = `${SongSlide("Video nhạc mới", "/videos/details", releasesVideosData.items, "video")}`;
   router.updatePageLinks();
 };
 

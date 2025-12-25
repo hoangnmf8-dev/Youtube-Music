@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @layer components {
   .expand-player {
-    @apply fixed inset-0 bg-[#121212] text-white z-50 flex flex-col bg-linear-to-b from-[#0f1417] via-[#0c1f21] to-[#0a0f10] translate-y-full z-50 transition-all duration-400;
+    @apply fixed inset-0 bg-[#121212] text-white flex flex-col bg-linear-to-b from-[#0f1417] via-[#0c1f21] to-[#0a0f10] translate-y-full z-30 transition-all duration-400;
   }
   .expand-player.open {
     @apply translate-y-0;

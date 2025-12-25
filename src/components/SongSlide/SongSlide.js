@@ -36,7 +36,7 @@ function SongSlide(title, path, data, type="albums") {
               ></i>
             </div>
             <h3 class="item-name mb-2 text-white font-medium truncate">${escapeHTML(item.title || item.name)}</h3>
-            <p class="item-artists text-gray-400 text-sm truncate">${escapeHTML(item.albumType || `${calcViews(item.views)} lượt xem` ||item.artists[0])}</p>
+            <p class="item-artists text-gray-400 text-sm truncate">${escapeHTML(item.views ? `${calcViews(item.views)} lượt xem` : (item.albumType || item.artists[0]))}</p>
           </a>
         </div>  
       `).join("")}

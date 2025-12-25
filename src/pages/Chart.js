@@ -86,14 +86,11 @@ const renderArtistsSection = async (param) => {
 
 const render = async () => {
   //Render
-  await renderSelect();
-  await renderVideosSection("GLOBAL");
-  await renderArtistsSection("GLOBAL");
+  await Promise.all([renderSelect(), renderVideosSection("GLOBAL"), renderArtistsSection("GLOBAL")])
   router.updatePageLinks();
 
   document.querySelector("select").addEventListener("change", async e => {
-    await renderVideosSection(e.target.value);
-    await renderArtistsSection(e.target.value);
+    await Promise.all([renderVideosSection(e.target.value), renderArtistsSection(e.target.value)])
     router.updatePageLinks();
   })
 };

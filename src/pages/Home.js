@@ -52,11 +52,7 @@ const render = async () => {
   const countrySection = $("#home-country");
 
   //Lấy dữ liệu
-  const moodsData = await getHomeMoods();
-  const quickPicksData = await getQuickPicks();
-  const albumsData = await getHomeAlbums();
-  const todayHitData = await getTodayHit();
-  const countryData = await getPlaylistCountry();
+  const [moodsData, quickPicksData, albumsData, todayHitData, countryData] = await Promise.all([getHomeMoods(), getQuickPicks(), getHomeAlbums(), getTodayHit(), getPlaylistCountry()])
 
   //Render ra giao diện
   moodsSection.innerHTML = `${TextSlide(moodsData.items)}`;
@@ -93,16 +89,17 @@ const renderAfterLogin = async () => {
   if(localStorage.getItem("user")) {
     profileData = JSON.parse(localStorage.getItem("user"));
   } else {
-    const profileData = await getProfile();
+    profileData = await getProfile();
   }
   const personalizedData = await getPersonalized();
+  console.log("🚀 ~ renderAfterLogin ~ personalizedData:", personalizedData)
 
   homeTitle.innerHTML = `<span>👋 Chào mừng ${escapeHTML(
     profileData.name
   )}</span>`;
   homeRelease.innerHTML = `${QuickPickSlide(
     "Nghe gần đây",
-    "/playlists/details",
+    "/albums/details",
     "quickpick",
     personalizedData
   )}`;

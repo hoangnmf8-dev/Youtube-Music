@@ -17,8 +17,6 @@ export default class ControlPlayer {
     this.isRepeat = false;
     this.endDebounce = false;
     this.debounceRandomAndRepeat = false;
-    this._controller = new AbortController();
-    this._signal = this._controller.signal;
   }
 
   setCurrentSong(song) {
@@ -146,8 +144,10 @@ export default class ControlPlayer {
             this.updateUI(this.dataSongs[this.index]);
             this.setCurrentSong(this.dataSongs[this.index]);
             player.classList.remove("hidden");
+            if (localStorage.getItem("access_token")) {
+              eventPlay({ songId: this.dataSongs[this.index].id });
+            }
           } catch (error) {
-            console.log(error);
             if (reqId !== this._reqId) return;
             if (error?.name === "AbortError") return; //Chỉ có tác dụng bỏ qua lỗi abort của trình duyệt để hiện error message không có sẵn tài nguyên
             this.cancelAudio();
@@ -179,11 +179,6 @@ export default class ControlPlayer {
       const percentListen = Math.floor(
         (this.audio.currentTime / this.audio.duration) * 100
       );
-      if (percentListen >= 10 && percentListen <= 11) {
-        if (localStorage.getItem("access_token")) {
-          eventPlay({ songId: this.dataSongs[this.index].id });
-        }
-      }
     });
 
     progress.addEventListener("change", (e) => {

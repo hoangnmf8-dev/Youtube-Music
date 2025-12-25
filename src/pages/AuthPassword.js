@@ -4,25 +4,38 @@ import { updatePassword } from "../service/authApi";
 import showToast from "../utils/showToast";
 import toggleLoading from "../utils/toggleLodaing";
 import { router } from "../route/router";
+import handleShowPassword from "../utils/handleShowPassword";
 
 function AuthPassword() {
   return `
    <div class="login-container fixed inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('../public/bg_login.jpg');">
     <form id="update-password-form" class="fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 min-w-[400px] rounded-lg p-10 bg-white/10 backdrop-blur-xl border border-white/20">
       <h2 class="text-white font-semibold text-center text-xl mb-6">CẬP NHẬT THÔNG TIN</h2>
-      <div class="form-group">
+      <div class="form-group group-current-password">
           <label for="current-password" class="block text-sm text-white mb-1">Mật khẩu hiện tại</label>
-          <input id="current-password" type="password" name="password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800">
+          <div class="relative">
+            <input id="current-password" type="password" name="current-password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" autocomplete="new-password">
+            <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye text-black/80 cursor-pointer"></i></div>
+            <div class="hide-password hidden absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye-slash"></i></div>
+          </div>
           <p class="form-group-error text-red-400 hidden"></p>
       </div>
-      <div class="form-group mt-6">
+      <div class="form-group mt-6 group-new-password">
           <label for="new-password" class="block text-sm text-white mb-1">Mật khẩu mới</label>
-          <input id="new-password" type="password" name="password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800">
+          <div class="relative">
+            <input id="new-password" type="password" name="new-password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" placeholder="Tối thiểu 8 ký tự...">
+            <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye text-black/80 cursor-pointer"></i></div>
+            <div class="hide-password hidden absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye-slash"></i></div>
+          </div>
           <p class="form-group-error text-red-400 hidden"></p>
       </div>
-      <div class="form-group mt-6">
+      <div class="form-group mt-6 group-confirm-password">
           <label for="confirm-password" class="block text-sm text-white mb-1">Xác nhận mật khẩu mới</label>
-          <input id="confirm-password" type="password" name="password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800">
+          <div class="relative">
+            <input id="confirm-password" type="password" name="confirm-password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800">
+            <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye text-black/80 cursor-pointer"></i></div>
+            <div class="hide-password hidden absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye-slash"></i></div>
+          </div>
           <p class="form-group-error text-red-400 hidden"></p>
       </div>
       <button type="submit" class="block w-full mt-8 px-4 py-2 bg-black/80 text-white rounded-xl hover:bg-red-400 transition cursor-pointer">
@@ -195,8 +208,15 @@ const updatePasswordUser = async () => {
   });
 };
 
+const showPassword = () => {
+  handleShowPassword(".group-current-password");
+  handleShowPassword(".group-new-password");
+  handleShowPassword(".group-confirm-password");
+}
+
 export const afterRenderAuthPassword = () => {
   $(".sidebar-item.active")?.classList.remove("active");
   $(".sidebar-item.sidebar-slide-nav-item.active")?.classList.remove("active");
   updatePasswordUser();
+  showPassword();
 };

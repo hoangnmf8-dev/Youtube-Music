@@ -1,7 +1,10 @@
 function showToast(state, text) {
-  const toastEl = document.querySelector("#header .toast");
+  const toastEl = document.createElement("div");
+  toastEl.classList.add('toast');
   toastEl.innerText = text;
+  document.body.append(toastEl);
   setTimeout(() => {
+    toastEl.classList.add("show");
     if (state) {
       toastEl.classList.add("bg-green-500", "show");
     } else {

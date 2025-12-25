@@ -28,8 +28,7 @@ const render = async () => {
   const genreSection = $("#genre-section");
 
   //Lấy dữ liệu
-  const categoriesData = await getCategories();
-  const linesData = await getLine();
+  const [categoriesData, linesData] = await Promise.all([getCategories(), getLine()]);
   
   //Render
   moodsSection.innerHTML = `${QuickPickSlide("Tâm trạng và khoảnh khắc", "/categories", "moodcards", categoriesData.items)}`;
@@ -47,7 +46,6 @@ export const afterRenderMoodAndGenres = async () => {
     await render();
     controlScroll();
   } catch (error) {
-    console.log("🚀 ~ afterRenderMoodAndGenres ~ error:", error)
     if (error.message === "Network Error") {
       showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
     }

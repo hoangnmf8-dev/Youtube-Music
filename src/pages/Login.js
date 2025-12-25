@@ -5,6 +5,7 @@ import { router } from "../route/router";
 import toggleLoading from "../utils/toggleLodaing";
 import showToast from "../utils/showToast";
 import handleBeforeRender from "../utils/handleBeforeRender";
+import handleShowPassword from "../utils/handleShowPassword";
 
 function Login() {
   return `
@@ -19,10 +20,18 @@ function Login() {
 
         <div class="form-group mt-6">
           <label for="login-password" class="block text-sm text-white mb-1">Mật khẩu</label>
-          <input class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" id="login-password" type="password"
-          name="userpassword" 
-          placeholder="Mật khẩu"
-          autocomplete="new-password"/>
+          <div class="relative group-login-input">
+            <input class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" id="login-password" type="password"
+            name="userpassword" 
+            placeholder="Mật khẩu"
+            autocomplete="new-password"/>
+            <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]">
+              <i class="fa-solid fa-eye text-black/80 cursor-pointer"></i>
+            </div>
+            <div class="hide-password hidden absolute top-1/2 -translate-y-1/2 right-[10px]">
+              <i class="fa-solid fa-eye-slash"></i>
+            </div>
+          </div>
           <p class="form-group-error hidden text-red-400"></p>
         </div>
 
@@ -50,15 +59,32 @@ function Login() {
 
         <div class="form-group mt-6">
           <label for="register-password" class="block text-sm text-white mb-1">Mật khẩu</label>
-          <input class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" id="register-password" type="password"
-          name="password" placeholder="Mật khẩu"/>
+          <div class="relative group-password-input">
+            <input class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" id="register-password" type="password"
+            name="password" placeholder="Mật khẩu tối thiểu 8 ký tự"/>
+            <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]">
+              <i class="fa-solid fa-eye text-black/80 cursor-pointer"></i>
+            </div>
+            <div class="hide-password hidden absolute top-1/2 -translate-y-1/2 right-[10px]">
+              <i class="fa-solid fa-eye-slash"></i>
+            </div>
+          </div>
+          
           <p class="form-group-error hidden text-red-400"></p>
         </div>
 
         <div class="form-group mt-6">
           <label for="register-comfirm-password" class="block text-sm text-white mb-1">Nhập lại mật khẩu</label>
-          <input class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" id="register-comfirm-password" type="password"
-          name="confirm-password" placeholder="Nhập lại mật khẩu"/>
+          <div class="relative group-confirm-input">
+            <input class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" id="register-comfirm-password" type="password"
+            name="confirm-password" placeholder="Nhập lại mật khẩu"/>
+            <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]">
+              <i class="fa-solid fa-eye text-black/80 cursor-pointer"></i>
+            </div>
+            <div class="hide-password hidden absolute top-1/2 -translate-y-1/2 right-[10px]">
+              <i class="fa-solid fa-eye-slash"></i>
+            </div>
+          </div>
           <p class="form-group-error hidden text-red-400"></p>
         </div>
 
@@ -322,15 +348,24 @@ const validateForm = () => {
         if (+error.status === 400) {
           showToast(false, "Email hoặc mật khẩu không đúng! Vui lòng thử lại");
         } else {
-          if(error.message === "Network Error") {
-            showToast(false, "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!");
-          } 
+          if (error.message === "Network Error") {
+            showToast(
+              false,
+              "Mạng không ổn định. Hãy kiểm tra lại kết nối mạng!"
+            );
+          }
         }
       } finally {
         toggleLoading(false);
       }
     }
   });
+};
+
+const showPassword = () => {
+  handleShowPassword(".group-login-input");
+  handleShowPassword(".group-password-input");
+  handleShowPassword(".group-confirm-input");
 };
 
 export const afterRenderLogin = () => {
@@ -342,4 +377,5 @@ export const afterRenderLogin = () => {
   }, 1000);
   disPlayForm();
   validateForm();
+  showPassword();
 };
