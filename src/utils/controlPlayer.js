@@ -30,7 +30,6 @@ export default class ControlPlayer {
   }
 
   updateUI(song) {
-    console.log(1)
     const $ = document.querySelector.bind(document);
     const mainInforThum = $(".main-song-infor img");
     const mainInforTitle = $(".main-song-infor .item-title");
@@ -100,7 +99,7 @@ export default class ControlPlayer {
 
   async play(idSong) {
     const srcSong = this.dataSongs?.[idSong]?.audioUrl;
-    if (!srcSong) throw new Error("Tài nguyên không có sẵn");
+    if (!srcSong) throw new Error();
 
     this.audio.pause();
     this.audio.currentTime = 0;
@@ -144,7 +143,7 @@ export default class ControlPlayer {
             this.updateUI(this.dataSongs[this.index]);
             this.setCurrentSong(this.dataSongs[this.index]);
             player.classList.remove("hidden");
-            if (localStorage.getItem("access_token")) {
+            if (localStorage.getItem("access_token") && this.dataSongs[this.index].title !== "Như một người dưng") {
               eventPlay({ songId: this.dataSongs[this.index].id });
             }
           } catch (error) {

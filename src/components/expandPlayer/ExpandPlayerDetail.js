@@ -3,7 +3,7 @@ import { calcSongTime } from "../../utils/calcListTime";
 
 function ExpandPlayerDetail(data = []) {
   return `
-    <div class="flex-1 overflow-y-auto max-h-screen pr-2 scrollbar-search">
+    <div class="flex-1 overflow-y-auto max-h-screen pr-2 scrollbar-search pb-[80px]">
       <h3
         class="text-2xl font-semibold mb-4 border-b border-teal-600/40 pb-2"
       >

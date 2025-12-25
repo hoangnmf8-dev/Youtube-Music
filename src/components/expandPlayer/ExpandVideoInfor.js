@@ -8,7 +8,7 @@ function ExpandVideoInfor(data) {
       class="expand-video-infor flex w-full flex-col items-cente md:h-[600px] text-center gap-6 lg:top-0 lg:self-start"
     >
       
-      <iframe id="iframe-expand-video" class="w-full h-2/3" src="https://www.youtube.com/embed/VzcQAVUFhzs?si=7301i5Fq_rwKaBve&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe id="iframe-expand-video" class="w-full h-2/3" src="https://www.youtube.com/embed/&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
       <div class="expand-control-video-wrapper flex flex-col gap-3">
         <div class="space-y-1">
