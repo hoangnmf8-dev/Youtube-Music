@@ -2,7 +2,7 @@
 
 import { calcSongTime } from "../../utils/calcListTime";
 
-function ExpandVideoInfor(data) {
+function ExpandVideoInfor() {
   return `
     <div
       class="expand-video-infor flex w-full flex-col items-cente md:h-[600px] text-center gap-6 lg:top-0 lg:self-start"
