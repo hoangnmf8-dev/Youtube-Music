@@ -66,11 +66,11 @@ export const afterRenderFooter = (slug) => {
     const controlPlayerFooter = new ControlPlayer({ audio, dataSongs });
     controlPlayerFooter.start("#player", "#main");
     controlPlayerFooter.start(".expand-player-infor", ".expand-player");
-    if (JSON.parse(sessionStorage.getItem("current_song"))) {
-      controlPlayerFooter.updateUI(
-        JSON.parse(sessionStorage.getItem("current_song"))
-      );
-    }
+    // if (JSON.parse(sessionStorage.getItem("current_song"))) {
+    //   controlPlayerFooter.updateUI(
+    //     JSON.parse(sessionStorage.getItem("current_song"))
+    //   );
+    // }
     document
       .querySelectorAll("#main .song-detail-item")
       .forEach((item) => item.classList.remove("active"));

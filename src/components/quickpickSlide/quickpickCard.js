@@ -4,7 +4,7 @@ function quickpickCard(data, path) {
   return `
   <div class="min-w-1/3 flex flex-col gap-8 shrink-0">       
     ${data.map(item => `
-      <a href="${path}/${escapeHTML(item.slug)}" class="item flex gap-4">
+      <a href="${item.type === "playlist" ? "/playlists/details" : "/albums/details"}/${escapeHTML(item.slug)}" class="item flex gap-4">
       <img
         class="img block w-12 aspect-square rounded-sm object-cover"
         src="${escapeHTML(item.thumb ? item.thumb : item.thumbnails[0])}"

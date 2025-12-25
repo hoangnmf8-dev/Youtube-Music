@@ -130,7 +130,6 @@ function Header() {
         </div>
       </div>
       
-      <div class="toast-container"></div>
       <div class="loading-modal hidden">
         <div class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
       </div>
@@ -151,7 +150,7 @@ const renderBeforeLogin = () => {
 
 const renderAfterLogin = async () => {
   let data;
-  if (localStorage.getItem("user")) {
+  if (localStorage.getItem("user") && localStorage.getItem("user") !== "undefined") {
     data = JSON.parse(localStorage.getItem("user"));
   } else {
     data = await getProfile();

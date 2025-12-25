@@ -31,6 +31,7 @@ export default class ControlPlayer {
   }
 
   updateUI(song) {
+    console.log(1)
     const $ = document.querySelector.bind(document);
     const mainInforThum = $(".main-song-infor img");
     const mainInforTitle = $(".main-song-infor .item-title");

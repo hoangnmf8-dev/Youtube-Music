@@ -101,7 +101,7 @@ const renderAfterLogin = async () => {
     "Nghe gần đây",
     "/albums/details",
     "quickpick",
-    personalizedData
+    personalizedData,
   )}`;
 };
 

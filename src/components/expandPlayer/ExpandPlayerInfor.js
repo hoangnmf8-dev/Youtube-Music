@@ -7,12 +7,12 @@ function ExpandPlayerInfor(data) {
     >
       <img
         class="thumb w-80 h-80 lg:w-100 lg:h-100 rounded-xl object-cover shadow-[0_0_25px_#0d948880] rouded-lg"
-        src="${null || JSON.parse(localStorage.getItem("current_song")).thumbnails[0]}"
+        src=""
       />
 
       <div class="space-y-1">
         <h2 class="title" class="text-xl font-semibold text-teal-400">
-          ${null || JSON.parse(localStorage.getItem("current_song")).title}
+          
         </h2>
         <p class="artist" class="text-gray-300 italic">
           Không rõ nghệ sĩ
