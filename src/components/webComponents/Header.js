@@ -15,7 +15,7 @@ function Header() {
     >
       <div class="wrapper h-full w-full mx-auto">
         <div class="row h-full flex justify-between items-center">
-          <div class="header-nav flex items-center gap-5">
+          <div class="header-nav flex items-center gap-5 mr-5 sm:mr-20">
             <button class="header-btn-nav p-3 flex items-center transition transition-colors duration-1.5 cursor-pointer rounded-full hover:bg-hover">
               <i class="fa-solid fa-bars text-white text-xl"></i>
             </button>
@@ -59,7 +59,6 @@ function Header() {
                   <path d="m17.75 13-7.5-4.25v8.5z" fill="#fff" />
                 </g>
               </svg>
-              <span class="text-xl font-semibold tracking-tight">Music</span>
             </a>
           </div>
 
@@ -90,7 +89,7 @@ function Header() {
               </div>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
               <button class="search flex items-center md:hidden">
                 <i class="fa-solid fa-magnifying-glass text-xl text-gray-300"></i>
               </button>
@@ -146,7 +145,7 @@ const $ = document.querySelector.bind(document);
 const renderBeforeLogin = () => {
   const headerUserBtn = $("#header .header-user");
   headerUserBtn.innerHTML = `
-    <a href="/login" class="min-w-30 rounded-full bg-white text-sm font-semibold text-black px-5 py-3 cursor-pointer hover:bg-gray-300 transition-all duration-150">Đăng nhập</a>
+    <a href="/login" class="max-w-30 rounded-full bg-white text-sm font-semibold text-black px-5 py-3 cursor-pointer hover:bg-gray-300 transition-all duration-150 text-nowrap">Đăng nhập</a>
   `;
 };
 

@@ -78,4 +78,8 @@ button {
   .song-detail-item.active {
     @apply bg-[#223041];
   }
+
+  .video-detail-item.active {
+    @apply bg-[#223041];
+  }
 }

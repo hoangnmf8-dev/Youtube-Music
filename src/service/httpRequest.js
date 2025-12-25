@@ -7,6 +7,7 @@ let refreshPromise = null;
 export const logout = () => {
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
+  localStorage.removeItem("user");
   router.navigate("/login");
   refreshPromise = null;
 };

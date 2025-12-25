@@ -93,7 +93,7 @@ export default class controlVideo {
           : ++this.index;
       }
       const videoId = this.dataVideo[this.index].videoId;
-      this.updateUI(videoId);
+      this.updateUI(this.index);
       this.playVideo(videoId);
     };
   }
@@ -112,7 +112,7 @@ export default class controlVideo {
           : --this.index;
       }
       const videoId = this.dataVideo[this.index].videoId;
-      this.updateUI(videoId);
+      this.updateUI(this.index);
       this.playVideo(videoId);
     };
   }
@@ -128,6 +128,13 @@ export default class controlVideo {
     };
   }
 
+  scrollToItem(el, { behavior = "smooth", block = "center" } = {}) {
+    if (!el) return;
+    el.scrollIntoView({ behavior, block, inline: "nearest" });
+    // requestAnimationFrame(() => {
+    // });
+  }
+
   updateUI(videoId) {
     const video = this.dataVideo[videoId];
     if(!video) return;
@@ -140,6 +147,21 @@ export default class controlVideo {
     const expandTittle = this.$(".expand-video-player .title");
     expandTittle.classList.add("text-xl", "font-semibold", "text-teal-400");
     expandTittle.innerHTML = `${escapeHTML(video.title)}`;
+
+    const mainVideoItem = Array.from(
+      document.querySelectorAll("#main .video-detail-item")
+    ).find((item) => +item.dataset.id === this.index);
+    const expandVideoItem = Array.from(
+      document.querySelectorAll(".expand-video-player .video-detail-item")
+    ).find((item) => +item.dataset.id === this.index);
+
+    document.querySelectorAll("#main .video-detail-item").forEach(item => item.classList.remove('active'));
+    document.querySelectorAll(".expand-video-player .video-detail-item").forEach(item => item.classList.remove('active'));
+    mainVideoItem?.classList.add("active");
+    expandVideoItem?.classList.add("active");
+
+    this.scrollToItem(mainVideoItem, { block: "center" });
+    this.scrollToItem(expandVideoItem, { block: "center" });
   }
 
   handleEndSong() {
@@ -155,7 +177,7 @@ export default class controlVideo {
         : ++this.index;
     }
     const videoId = this.dataVideo[this.index].videoId;
-    this.updateUI(videoId);
+    this.updateUI(this.index);
     this.playVideo(videoId);
   }
 

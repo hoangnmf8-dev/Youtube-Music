@@ -4,7 +4,7 @@ import { calcVideoTime } from "../../utils/calcListTime";
 
 function ExpandVideoDetail(data = []) {
   return `
-    <div class="expand-video-detail basis-1/2 overflow-y-auto max-h-screen pr-2 scrollbar-search">
+    <div class="expand-video-detail basis-1/2 overflow-y-auto max-h-screen pr-2 scrollbar-search pb-20">
       <h3
         class="text-2xl font-semibold mb-4 border-b border-teal-600/40 pb-2"
       >
