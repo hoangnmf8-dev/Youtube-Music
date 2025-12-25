@@ -23,7 +23,7 @@ function AuthPassword() {
       <div class="form-group mt-6 group-new-password">
           <label for="new-password" class="block text-sm text-white mb-1">Mật khẩu mới</label>
           <div class="relative">
-            <input id="new-password" type="password" name="new-password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" placeholder="Tối thiểu 8 ký tự...">
+            <input id="new-password" type="password" name="new-password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" placeholder="Tối thiểu 8 ký tự..." autocomplete="new-password">
             <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye text-black/80 cursor-pointer"></i></div>
             <div class="hide-password hidden absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye-slash"></i></div>
           </div>
@@ -32,7 +32,7 @@ function AuthPassword() {
       <div class="form-group mt-6 group-confirm-password">
           <label for="confirm-password" class="block text-sm text-white mb-1">Xác nhận mật khẩu mới</label>
           <div class="relative">
-            <input id="confirm-password" type="password" name="confirm-password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800">
+            <input id="confirm-password" type="password" name="confirm-password" value="" class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" autocomplete="new-password">
             <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye text-black/80 cursor-pointer"></i></div>
             <div class="hide-password hidden absolute top-1/2 -translate-y-1/2 right-[10px]"><i class="fa-solid fa-eye-slash"></i></div>
           </div>

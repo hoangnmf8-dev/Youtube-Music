@@ -33,9 +33,9 @@ function Player() {
             <div
               class="footer-song-time hidden md:hidden lg:flex items-center gap-1 text-sm text-gray-300"
             >
-              <span class="current">1:20</span>
+              <span class="current">00:00</span>
               <span>/</span>
-              <span class="duration"></span>
+              <span class="duration">00:00</span>
             </div>
           </div>
 
