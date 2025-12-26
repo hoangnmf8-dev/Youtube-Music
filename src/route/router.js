@@ -178,7 +178,7 @@ const initRouter = async () => {
       afterRenderFooter();
     })
     .notFound(function () {
-      showToast(false, "Trang của bạn tìm kiếm không tồn tại!");
+      showToast(false, "Không tồn tại trang mà bạn tìm kiếm!");
       router.navigate("/");
     })
     .resolve();
