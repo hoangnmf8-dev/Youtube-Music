@@ -2,6 +2,8 @@ import toggleLoading from "./toggleLodaing";
 
 export default function handleBeforeRender(id) {
   const $ = document.querySelector.bind(document);
+  const dropMenu = $("#search-dropdown");
+  dropMenu.classList.add("hidden");
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   toggleLoading(true);
   const sidebarSlide = $("#sidebar-slide");

@@ -205,6 +205,7 @@ const handleLogout = () => {
 const handleSearch = () => {
   let id;
   return function (e) {
+    console.log(1)
     clearTimeout(id);
     id = setTimeout(async () => {
       const dropMenu = $("#search-dropdown");
@@ -346,12 +347,12 @@ const showInputInMobile = () => {
 export const afterRenderHeader = async () => {
   if (localStorage.getItem("access_token")) {
     await renderAfterLogin();
-    $("#header input").oninput = handleSearch();
     showInputInMobile();
     handleLogout();
   } else {
     renderBeforeLogin();
   }
+  $("#header input").oninput = handleSearch();
   showSidebarSlide();
   router.updatePageLinks();
 };
