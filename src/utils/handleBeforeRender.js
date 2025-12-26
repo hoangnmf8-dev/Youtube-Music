@@ -3,7 +3,11 @@ import toggleLoading from "./toggleLodaing";
 export default function handleBeforeRender(id) {
   const $ = document.querySelector.bind(document);
   const dropMenu = $("#search-dropdown");
+  const headerInput = $("#header input");
+  const headerClose = $("#search-clear");
+  headerInput.value = "";
   dropMenu.classList.add("hidden");
+  headerClose.classList.add("hidden");
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   toggleLoading(true);
   const sidebarSlide = $("#sidebar-slide");
