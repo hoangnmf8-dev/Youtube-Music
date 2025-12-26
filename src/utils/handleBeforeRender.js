@@ -2,14 +2,21 @@ import toggleLoading from "./toggleLodaing";
 
 export default function handleBeforeRender(id) {
   const $ = document.querySelector.bind(document);
+
+  //Đóng drop menu
   const dropMenu = $("#search-dropdown");
   const headerInput = $("#header input");
   const headerClose = $("#search-clear");
   headerInput.value = "";
   dropMenu.classList.add("hidden");
   headerClose.classList.add("hidden");
+
+  //Tự động cuộn trang lên trên
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
   toggleLoading(true);
+
+  //Đóng sidebar và sidebar slide
   const sidebarSlide = $("#sidebar-slide");
   const sidebarBtn = $(`.sidebar-item.${id}`);
   const sidebarSlideBtn = $(`.sidebar-slide-nav-item.${id}`);

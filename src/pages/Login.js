@@ -61,7 +61,7 @@ function Login() {
           <label for="register-password" class="block text-sm text-white mb-1">Mật khẩu</label>
           <div class="relative group-password-input">
             <input class="w-full px-4 py-2 rounded bg-white/70 focus:bg-white text-gray-800" id="register-password" type="password"
-            name="password" placeholder="Mật khẩu tối thiểu 8 ký tự" autocomplete="new-password"/>
+            name="userpassword" placeholder="Mật khẩu tối thiểu 6 ký tự" autocomplete="new-password"/>
             <div class="show-password absolute top-1/2 -translate-y-1/2 right-[10px]">
               <i class="fa-solid fa-eye text-black/80 cursor-pointer"></i>
             </div>
@@ -208,9 +208,9 @@ const validateForm = () => {
       errorText = "Mật khẩu không được để trống";
       check = false;
     }
-    if (check && inputValue.length < 8) {
+    if (check && inputValue.length < 6) {
       isValid = false;
-      errorText = "Mật khẩu phải có ít nhất 8 ký tự";
+      errorText = "Mật khẩu phải có ít nhất 6 ký tự";
     }
 
     return {
