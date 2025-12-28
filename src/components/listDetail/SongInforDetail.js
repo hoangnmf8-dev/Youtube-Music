@@ -14,9 +14,9 @@ export default function SongInforDetail(data) {
       </div>
       <div class="song-lyric hidden flex-col items-center">
         <div id="lyrics">
-        <h1 class="font-semibold text-[40px] text-center">Lyric:</h1>
-          <p class="wait text-white font-semibold text-2xl">Vui lòng chờ một chút :))))</p>
+          <h1 class="font-semibold text-[40px] text-center">Lyric:</h1>
           <div class="first-line line-song"></div>
+          <p class="wait relative font-semibold text-2xl text-transparent">Vui lòng chờ một chút :))))</p>
           <div class="last-line line-song"></div>
         </div>
       </div>

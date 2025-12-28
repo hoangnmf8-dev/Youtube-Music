@@ -28,6 +28,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transition: opacity .3s ease-in;
 }
 
 .line.show {
@@ -49,4 +51,25 @@
   overflow: hidden;
   transform-origin: left center;
   font-weight: 700;
+}
+
+.wait::before {
+  content: "Vui lòng chờ một chút :))))";
+  position: absolute;
+  white-space: nowrap;
+  font-size: 25px;
+  color: #fff;
+  overflow: hidden;
+  border-right: 4px solid #fff;
+  animation: animate 3s linear infinite;
+  filter: drop-shadow(0 0 20px #fff) drop-shadow(0 0 50px #fff);
+}
+
+@keyframes animate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }

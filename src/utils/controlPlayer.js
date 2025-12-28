@@ -95,6 +95,11 @@ export default class ControlPlayer {
     if (expandWrap?.classList.contains("open")) {
       this.scrollToItem(expandSongItem, { block: "center" });
     }
+
+    //Hiện thông báo chờ lyric
+    this.$(".wait").classList.remove("hidden");
+    this.$(".first-line").innerHTML = "";
+    this.$(".last-line").innerHTML = "";
   }
 
   async play(idSong) {

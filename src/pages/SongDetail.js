@@ -3124,13 +3124,17 @@ function updateLyrics() {
     });
 
     const divFirst = document.createElement("div");
-    divFirst.className = "line show";
+    divFirst.className = "line";
     divFirst.innerHTML = shadowFirstLine;
 
     const divSecond = document.createElement("div");
-    divSecond.className = "line show";
+    divSecond.className = "line";
     divSecond.innerHTML = shadowSecondLine;
 
+    requestAnimationFrame(() => {
+      divFirst.classList.add("show");
+      divSecond.classList.add("show");
+    })
     firstLine.append(divFirst);
     lastLine.append(divSecond);
   }
