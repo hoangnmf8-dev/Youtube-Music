@@ -1,9 +1,11 @@
 export default function dragAndDrop() {
-  let cachedWinSize = { width: 400, height: 0 };
+  let cachedWinSize = { width: 400, height: window.innerHeight / 2.5 };
 
   const init = () => {
     const chatbotBtn = document.querySelector("#chatbase-bubble-button");
     const chatbotWindow = document.querySelector("#chatbase-bubble-window");
+    const chatbotBubble = document.querySelector("#chatbase-message-bubbles");
+    chatbotBubble.style.display = "none";
     if (!chatbotBtn || !chatbotWindow) return false;
 
     const vh = window.innerHeight;
