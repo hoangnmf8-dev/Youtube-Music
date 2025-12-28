@@ -12,7 +12,7 @@ export default function handleBeforeRender(id) {
   headerClose.classList.add("hidden");
 
   //Tự động cuộn trang lên trên
-  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
   toggleLoading(true);
 

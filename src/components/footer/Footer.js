@@ -10,6 +10,8 @@ import controlVideo, {
   zoomInExpandVideo,
 } from "../../utils/controlVideo";
 import showToast from "../../utils/showToast";
+import dragAndDrop from "../../utils/dragAndDrop";
+
 function Footer(data) {
   return `
     <footer id="footer" class=" fixed left-0 right-0 bottom-0 text-white z-30">
@@ -36,6 +38,7 @@ export const afterRenderFooter = (slug) => {
     sessionStorage.removeItem("current_song");
     return ``;
   });
+
   const audio = $("audio");
   const dataSongs = JSON.parse(sessionStorage.getItem("data_song"));
   const dataVideos = JSON.parse(sessionStorage.getItem("data_video"));
@@ -59,18 +62,13 @@ export const afterRenderFooter = (slug) => {
       ?.classList.remove("active");
   };
   //Lấy dữ liệu ra khi chuyển trang
-  if(sessionStorage.getItem("data_song") && slug === "songs") {
+  if (sessionStorage.getItem("data_song") && slug === "songs") {
     expandPlayer.innerHTML = `${ExpandPlayer(dataSongs)}`;
   }
   if (sessionStorage.getItem("data_song")) {
     const controlPlayerFooter = new ControlPlayer({ audio, dataSongs });
     controlPlayerFooter.start("#player", "#main");
     controlPlayerFooter.start(".expand-player-infor", ".expand-player");
-    // if (JSON.parse(sessionStorage.getItem("current_song"))) {
-    //   controlPlayerFooter.updateUI(
-    //     JSON.parse(sessionStorage.getItem("current_song"))
-    //   );
-    // }
     document
       .querySelectorAll("#main .song-detail-item")
       .forEach((item) => item.classList.remove("active"));
@@ -159,4 +157,10 @@ export const afterRenderFooter = (slug) => {
     }
     playerVideo?.closePlayer();
   }
+
+  //Gán giá trị cho data-route cho body 
+  document.body.dataset.route = slug || "default";
+
+  //Xử lý kéo thả cho chatbot
+  dragAndDrop();
 };
