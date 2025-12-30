@@ -150,7 +150,10 @@ const renderBeforeLogin = () => {
 
 const renderAfterLogin = async () => {
   let data;
-  if (localStorage.getItem("user") && localStorage.getItem("user") !== "undefined") {
+  if (
+    localStorage.getItem("user") &&
+    localStorage.getItem("user") !== "undefined"
+  ) {
     data = JSON.parse(localStorage.getItem("user"));
   } else {
     data = await getProfile();
@@ -205,7 +208,6 @@ const handleLogout = () => {
 const handleSearch = () => {
   let id;
   return function (e) {
-    console.log(1)
     clearTimeout(id);
     id = setTimeout(async () => {
       const dropMenu = $("#search-dropdown");
@@ -270,17 +272,6 @@ const handleSearch = () => {
               .join("")}
         </div>
       `;
-      document.querySelectorAll(".completed-result").forEach((item) => {
-        item.onclick = (e) => {
-          const url = item.dataset.url;
-          if (!url) return;
-          router.navigate(url);
-          clearInput.classList.add("hidden");
-          $("#header input").value = "";
-          dropMenu.classList.add("hidden");
-        };
-      });
-
       document.querySelectorAll(".suggest-result").forEach((item) => {
         item.onclick = (e) => {
           const inputSearchValue = item.innerText;
@@ -324,6 +315,17 @@ const handleSearch = () => {
           `;
         };
       });
+
+      document.addEventListener("click", e => {
+        if(e.target.closest(".completed-result")) {
+          const url = e.target.closest(".completed-result").dataset.url;
+          if (!url) return;
+          router.navigate(url);
+          clearInput.classList.add("hidden");
+          $("#header input").value = "";
+          dropMenu.classList.add("hidden");
+        }
+      })
       router.updatePageLinks();
     }, 300);
   };
@@ -333,16 +335,16 @@ const showInputInMobile = () => {
   const searchIcon = $("#header .search");
   const searchLeft = $(".search-left");
   const headerSearchWrapper = $("#header .search-wrapper");
-  
-  searchIcon.onclick = e => {
+
+  searchIcon.onclick = (e) => {
     headerSearchWrapper.classList.remove("hidden");
     headerSearchWrapper.classList.add("flex");
-  }
+  };
 
-  searchLeft.onclick = e => {
+  searchLeft.onclick = (e) => {
     headerSearchWrapper.classList.remove("flex");
     headerSearchWrapper.classList.add("hidden");
-  }
+  };
 };
 export const afterRenderHeader = async () => {
   if (localStorage.getItem("access_token")) {
