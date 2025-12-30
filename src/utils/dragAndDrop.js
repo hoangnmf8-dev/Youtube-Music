@@ -4,9 +4,9 @@ export default function dragAndDrop() {
   const init = () => {
     const chatbotBtn = document.querySelector("#chatbase-bubble-button");
     const chatbotWindow = document.querySelector("#chatbase-bubble-window");
+    if (!chatbotBtn || !chatbotWindow) return false;
     const chatbotBubble = document.querySelector("#chatbase-message-bubbles");
     chatbotBubble.style.display = "none";
-    if (!chatbotBtn || !chatbotWindow) return false;
 
     const vh = window.innerHeight;
     const vw = window.innerWidth;

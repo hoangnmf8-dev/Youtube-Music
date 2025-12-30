@@ -97,9 +97,11 @@ export default class ControlPlayer {
     }
 
     //Hiện thông báo chờ lyric
-    this.$(".wait").classList.remove("hidden");
-    this.$(".first-line").innerHTML = "";
-    this.$(".last-line").innerHTML = "";
+    if(this.$(".wait")) {
+      this.$(".wait").classList.remove("hidden");
+      this.$(".first-line").innerHTML = "";
+      this.$(".last-line").innerHTML = "";
+    }
   }
 
   async play(idSong) {
@@ -152,6 +154,7 @@ export default class ControlPlayer {
               eventPlay({ songId: this.dataSongs[this.index].id });
             }
           } catch (error) {
+            console.log(error)
             if (reqId !== this._reqId) return;
             if (error?.name === "AbortError") return; //Chỉ có tác dụng bỏ qua lỗi abort của trình duyệt để hiện error message không có sẵn tài nguyên
             this.cancelAudio();
