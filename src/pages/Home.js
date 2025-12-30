@@ -116,7 +116,6 @@ const controlScroll = () => {
 };
 
 export const afterRenderHome = async () => {
-  //Xử lý trước khi render
   handleBeforeRender("home");
   try {
     await render();
