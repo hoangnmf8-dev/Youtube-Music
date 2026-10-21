@@ -1,0 +1,75 @@
+.song-lyric {
+  width: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+}
+
+#lyrics {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.line-song {
+  background-color: transparent;
+  height: 100px;
+  position: relative;
+  width: 100%;
+}
+
+.line {
+  width: 100%;
+  height: 100%;
+  color: yellow;
+  background-color: transparent;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity .3s ease-in;
+}
+
+.line.show {
+  opacity: 1;
+}
+
+.span {
+  position: relative;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.shadow {
+  position: absolute;
+  inset: 0;
+  color: yellow;
+  width: 0;
+  overflow: hidden;
+  transform-origin: left center;
+  font-weight: 700;
+}
+
+.wait::before {
+  content: "Vui lòng chờ một chút :))))";
+  position: absolute;
+  white-space: nowrap;
+  font-size: 25px;
+  color: #fff;
+  overflow: hidden;
+  border-right: 4px solid #fff;
+  animation: animate 3s linear infinite;
+  filter: drop-shadow(0 0 20px #fff) drop-shadow(0 0 50px #fff);
+}
+
+@keyframes animate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
